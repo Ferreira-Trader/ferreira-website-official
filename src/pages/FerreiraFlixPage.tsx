@@ -25,5 +25,9 @@ export function FerreiraFlixPage() {
     };
   }, []);
 
-  return <PginaNetflix />;
+  return (
+    <div className="page-ferreiraflix">
+      <PginaNetflix />
+    </div>
+  );
 }
