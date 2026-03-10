@@ -1,2 +1,4 @@
-subir.zip
-.wrangler/
+node_modules
+dist
+.wrangler
+*.zip
