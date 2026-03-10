@@ -258,7 +258,7 @@ const howItWorksSteps = [
 const pricingPlans = [
   {
     name: "Mensal",
-    priceMain: "R$97",
+    priceMain: "R$197",
     priceDecimal: ",00",
     period: "/mês",
     description: "Perfeito para começar",
@@ -279,15 +279,15 @@ const pricingPlans = [
     buttonText: "Assinar Mensal",
     buttonVariant: "secondary" as const,
     highlighted: false,
-    url: "https://checkout.ferreiratrader.com.br/subscribe/a0a788f5-453a-4436-a2ef-a33b6d415809",
+    url: "https://checkout.ferreiratrader.com.br/subscribe/a142bf91-6829-497e-be25-4a106acc32ba",
   },
   {
     name: "Semestral",
-    priceMain: "R$397",
+    priceMain: "R$797",
     priceDecimal: ",00",
     period: "/6 meses",
     description: "Economia de 32%",
-    savings: "R$66 /mês",
+    savings: "R$133 /mês",
     features: [
       "10.800 análises por semestre",
       "Análise de I.A Gráfico",
@@ -303,15 +303,15 @@ const pricingPlans = [
     buttonText: "Assinar Semestral!",
     buttonVariant: "secondary" as const,
     highlighted: false,
-    url: "https://checkout.ferreiratrader.com.br/subscribe/0ce67026-41d7-4348-be47-aac678271044",
+    url: "https://checkout.ferreiratrader.com.br/subscribe/a142c1d6-056f-4706-9cfd-ce8d90bdc833",
   },
   {
     name: "Anual",
-    priceMain: "R$497",
+    priceMain: "R$997",
     priceDecimal: ",00",
     period: "/ano",
-    description: "Economia de 57%",
-    savings: "R$41 /mês",
+    description: "Economia de 58%",
+    savings: "R$83 /mês",
     features: [
       "23.000 análises por ano",
       "Análise de I.A Gráfico",
@@ -327,7 +327,7 @@ const pricingPlans = [
     buttonVariant: "default" as const,
     highlighted: true,
     badge: "Mais Popular",
-    url: "https://checkout.ferreiratrader.com.br/subscribe/fc42aa8b-add0-4fbf-bdf5-11b26ade58db",
+    url: "https://checkout.ferreiratrader.com.br/subscribe/a142bd0b-87a5-4608-afb3-0f1cb4c44720",
   },
 ];
 
