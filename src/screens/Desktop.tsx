@@ -96,7 +96,7 @@ const MobileCardsSection = () => {
             <img
               className="w-full h-full rounded-full object-contain animate-spin-3d"
               alt="Neuron 3D"
-              src="neuron-3d-1.png"
+              src="/neuron/neuron-3d-1.png"
             />
           </div>
         </div>
@@ -129,7 +129,7 @@ const MobileCardsSection = () => {
                   <img
                     className="w-[32px] h-[32px] object-cover mx-auto mb-[16px]"
                     alt="Image"
-                    src="image-41.png"
+                    src="/neuron/image-41.png"
                   />
                   <h3 className="[font-family:'Inter',Helvetica] font-black text-white text-base text-center tracking-[0] leading-[normal] mb-[12px]">
                     {card.title}
@@ -152,19 +152,19 @@ const painPoints = [
     title: "Estuda todo dia e continua perdido", 
     description:
       "Dedicou horas operando e mesmo assim não saiu do lugar, ou pior, saiu no prejuízo e sentia que não estava bom o suficiente e faltava algo",
-    image: "image-1.png",
+    image: "/neuron/image-1.png",
   },
   {
     title: "Sabe onde analisar, mas não confia na análise",
     description:
       "Você identifica suporte, resistência, padrão... mas na hora de clicar, a dúvida grita mais alto. E quando não entra, o mercado vai sem você.",
-    image: "image-2.png",
+    image: "/neuron/image-2.png",
   },
   {
     title: "O medo de errar é maior que a vontade de acertar",
     description:
       "Você fica travado esperando a entrada perfeita. Enquanto isso, o tempo passa, as oportunidades vão — e a frustração só aumenta.",
-    image: "image-3.png",
+    image: "/neuron/image-3.png",
   },
 ];
 
@@ -173,13 +173,13 @@ const problemCards = [
     title: "Não entende nada no gráfico",
     description:
       "Dedicou horas operando e mesmo assim não saiu do lugar, ou pior, saiu no prejuízo e sentia que não estava bom o suficiente e faltava algo", 
-    image: "image-4.png",
+    image: "/neuron/image-4.png",
   },
   {
     title: "Ganha num dia, devolve no outro",
     description:
       "Você tem dias bons, mas não sustenta. A inconsistência acaba com seu lucro — e pior, sua confiança. Parece que está sempre voltando pro zero.",
-    image: "image-5.png",
+    image: "/neuron/image-5.png",
   },
 ];
 
@@ -234,24 +234,24 @@ const howItWorksSteps = [
     title: "Abra a Neuron",
     description:
       "Acesse de qualquer dispositivo.\n Fez login,tá dentro.",
-    image: "image-23.png",
-    video: "passo1.gif",
+    image: "/neuron/image-23.png",
+    video: "/neuron/passo1.gif",
   },
   {
     number: "2",
     title: "Escolha o ativo ou mande um print",
     description:
       "Seleciona o par ou tira print e cola direto.\n A IA processa em segundos..", 
-    image: "image-23.png",
-    video: "passo2.gif",
+    image: "/neuron/image-23.png",
+    video: "/neuron/passo2.gif",
   },
   {
     number: "3",
     title: "Receba a análise completa",
     description:
       "Contexto, zonas de interesse,\n gatilhos e nível de confiança.\n Tudo 100% explicado.",
-    image: "image-23.png",
-    video: "passo3.gif",
+    image: "/neuron/image-23.png",
+    video: "/neuron/passo3.gif",
   },
 ];
 
@@ -487,7 +487,7 @@ export const Desktop = (): JSX.Element => {
         <img
           className="w-[200px] md:w-[299px] h-auto object-contain mb-[29px] relative z-10"
           alt="Neuron AI"
-          src="neuron-ai-4.png"
+          src="/neuron/neuron-ai-4.png"
         />
 
  <h1 className="max-w-[920px] w-full [font-family:'Inter',Helvetica] font-semibold text-white text-[32px] md:text-[54px] lg:text-[64px] text-center tracking-[0] leading-[1.3] mb-[51px] px-4 relative z-10"> O gráfico já te mostra o que fazer. Você só precisa ver. </h1> 
@@ -544,7 +544,7 @@ export const Desktop = (): JSX.Element => {
                 controls
                 className="absolute inset-[3px] w-[calc(100%-6px)] h-[calc(100%-6px)] rounded-[29px] object-cover z-0"
               >
-                <source src="videoneuron.mp4" type="video/mp4" />
+                <source src="https://s3.ferreiratrader.com.br/neuron/videoneuron.mp4" type="video/mp4" />
                 Seu navegador não suporta vídeos.
               </video>
             </div>
@@ -701,7 +701,7 @@ export const Desktop = (): JSX.Element => {
               <img
                 className="w-[280px] md:w-[320px] lg:w-[550px] h-auto object-contain"
                 alt="Design sem nome"
-                src="design-sem-nome--29--1.png"
+                src="/neuron/design-sem-nome--29--1.png"
               />
             </div>
 
@@ -710,7 +710,7 @@ export const Desktop = (): JSX.Element => {
                 <img
                   className="w-[55px] h-[55px] object-cover"
                   alt="Neuron logo PNG"
-                  src="neuron--logo-png--1.png"
+                  src="/neuron/neuron--logo-png--1.png"
                 />
               </div>
 
@@ -775,38 +775,38 @@ export const Desktop = (): JSX.Element => {
             <img
               className="absolute top-[67px] left-[331px] w-[275px] h-[110px] animate-line-glow"
               alt="Line"
-              src="line-2.svg"
+              src="/neuron/line-2.svg"
               style={{ filter: 'drop-shadow(0 0 8px rgba(0, 188, 255, 0.6))' }}
             />
 
             <img
               className="absolute top-[67px] left-[844px] w-[275px] h-[110px] animate-line-glow"
               alt="Line"
-              src="line-1.svg"
+              src="/neuron/line-1.svg"
               style={{ filter: 'drop-shadow(0 0 8px rgba(0, 188, 255, 0.6))' }}
             />
 
             <img
               className="absolute top-[370px] left-[404px] w-[275px] h-[110px] animate-line-glow"
               alt="Line"
-              src="line-4.svg"
+              src="/neuron/line-4.svg"
               style={{ filter: 'drop-shadow(0 0 8px rgba(0, 188, 255, 0.6))' }}
             />
 
             <img
               className="absolute top-[370px] left-[745px] w-[275px] h-[110px] animate-line-glow"
               alt="Line"
-              src="line-3.svg"
+              src="/neuron/line-3.svg"
               style={{ filter: 'drop-shadow(0 0 8px rgba(0, 188, 255, 0.6))' }}
             />
 
             <div className="absolute top-[93px] left-[561px] w-[318px] h-[318px] z-30">
               <div className="absolute inset-0 rounded-full bg-[#00bcff] opacity-20 blur-3xl animate-pulse-glow"></div>
-              <img className="w-full h-full relative z-10 drop-shadow-[0_0_25px_rgba(0,188,255,0.5)]" alt="Ellipse" src="ellipse-2.svg" />
+              <img className="w-full h-full relative z-10 drop-shadow-[0_0_25px_rgba(0,188,255,0.5)]" alt="Ellipse" src="/neuron/ellipse-2.svg" />
               <img
                 className="absolute top-[23px] left-[23px] w-[272px] h-[272px] rounded-[272px] object-cover animate-spin-3d z-20 drop-shadow-[0_0_30px_rgba(0,188,255,0.6)]"
                 alt="Neuron"
-                src="neuron-3d-1.png"
+                src="/neuron/neuron-3d-1.png"
               />
               <div className="absolute top-[23px] left-[23px] w-[272px] h-[272px] rounded-[272px] bg-gradient-to-tr from-[#00bcff]/30 via-transparent to-[#00e0d6]/30 animate-spin-slow pointer-events-none z-10"></div>
             </div>
@@ -817,7 +817,7 @@ export const Desktop = (): JSX.Element => {
                 <img
                   className="w-[38px] h-[38px] object-cover mx-auto mb-[20px] drop-shadow-[0_0_15px_rgba(0,188,255,0.8)]"
                   alt="Image"
-                  src="image-41.png"
+                  src="/neuron/image-41.png"
                 />
                 <h3 className="mx-auto [font-family:'Inter',Helvetica] font-black text-white text-lg text-center tracking-[0] leading-[normal] mb-[15px]">
                    Para quem está começando
@@ -834,7 +834,7 @@ export const Desktop = (): JSX.Element => {
                 <img
                   className="w-[38px] h-[38px] object-cover mx-auto mb-[20px] drop-shadow-[0_0_15px_rgba(0,188,255,0.8)]"
                   alt="Image"
-                  src="image-41.png"
+                  src="/neuron/image-41.png"
                 />
                 <h3 className="mx-auto [font-family:'Inter',Helvetica] font-black text-white text-lg text-center tracking-[0] leading-[normal] mb-[15px]">
                 Para quem estuda, mas não opera
@@ -851,7 +851,7 @@ export const Desktop = (): JSX.Element => {
                 <img
                   className="w-[38px] h-[38px] object-cover mx-auto mb-[20px] drop-shadow-[0_0_15px_rgba(0,188,255,0.8)]"
                   alt="Image"
-                  src="image-41.png"
+                  src="/neuron/image-41.png"
                 />
                 <h3 className="mx-auto [font-family:'Inter',Helvetica] font-black text-white text-lg text-center tracking-[0] leading-[normal] mb-[15px]">
                   Para quem opera, mas não é consistente
@@ -868,7 +868,7 @@ export const Desktop = (): JSX.Element => {
                 <img
                   className="w-[38px] h-[38px] object-cover mx-auto mb-[20px] drop-shadow-[0_0_15px_rgba(0,188,255,0.8)]"
                   alt="Image"
-                  src="image-41.png"
+                  src="/neuron/image-41.png"
                 />
                 <h3 className="mx-auto [font-family:'Inter',Helvetica] font-black text-white text-lg text-center tracking-[0] leading-[normal] mb-[15px]">
                   Para quem quer se profissionalizar 
@@ -1078,7 +1078,7 @@ export const Desktop = (): JSX.Element => {
             </div>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] lg:w-[700px] opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-500 rounded-xl shadow-[0_0_60px_rgba(0,188,255,0.5)] border-2 border-[#00bcff]">
               <img
-                src="passo1.gif"
+                src="/neuron/passo1.gif"
                 alt="Passo 1"
                 className="w-full h-auto rounded-xl"
                 style={{ objectFit: 'contain', display: 'block' }}
@@ -1110,7 +1110,7 @@ export const Desktop = (): JSX.Element => {
             </div>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] lg:w-[700px] opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-500 rounded-xl shadow-[0_0_60px_rgba(0,188,255,0.5)] border-2 border-[#00bcff]">
               <img
-                src="passo2.gif"
+                src="/neuron/passo2.gif"
                 alt="Passo 2"
                 className="w-full h-auto rounded-xl"
                 style={{ objectFit: 'contain', display: 'block' }}
@@ -1142,7 +1142,7 @@ export const Desktop = (): JSX.Element => {
             </div>
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] lg:w-[700px] opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-500 rounded-xl shadow-[0_0_60px_rgba(0,188,255,0.5)] border-2 border-[#00bcff]">
               <img
-                src="passo3.gif"
+                src="/neuron/passo3.gif"
                 alt="Passo 3"
                 className="w-full h-auto rounded-xl"
                 style={{ objectFit: 'contain', display: 'block' }}
@@ -1235,7 +1235,7 @@ export const Desktop = (): JSX.Element => {
                   key={index}
                   className="w-[36px] h-[34px]"
                   alt="Star"
-                  src="star-5.svg"
+                  src="/neuron/star-5.svg"
                 />
               ))}
               <div className="ml-[10px] bg-[linear-gradient(313deg,rgba(217,223,245,1)_0%,rgba(104,109,125,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent] [font-family:'Inter',Helvetica] font-semibold text-transparent text-[32px] tracking-[0] leading-[normal]">
@@ -1260,7 +1260,7 @@ export const Desktop = (): JSX.Element => {
                 key={index}
                 className="w-[20px] h-[19px]"
                 alt="Star"
-                src="star-5.svg"
+                src="/neuron/star-5.svg"
               />
             ))}
             <div className="ml-[6px] bg-[linear-gradient(313deg,rgba(217,223,245,1)_0%,rgba(104,109,125,1)_100%)] [-webkit-background-clip:text] bg-clip-text [-webkit-text-fill-color:transparent] [text-fill-color:transparent] [font-family:'Inter',Helvetica] font-semibold text-transparent text-[20px] tracking-[0] leading-[normal]">
@@ -1343,7 +1343,7 @@ export const Desktop = (): JSX.Element => {
                       <img
                         className="w-[18px] h-[18px] object-cover flex-shrink-0"
                         alt="Image"
-                        src="image-41.png"
+                        src="/neuron/image-41.png"
                       />
                       <p className="flex-1 [font-family:'Inter',Helvetica] font-medium text-[#b4b4b4] text-[14px] lg:text-[15px] text-left tracking-[0] leading-[1.5]">
                         {feature}
@@ -1410,7 +1410,7 @@ export const Desktop = (): JSX.Element => {
           <img
             className="w-[200px] md:w-[280px] lg:w-[350px] h-auto object-contain mb-[40px] md:mb-[50px] relative z-10"
             alt="Image"
-            src="image-20.png"
+            src="/neuron/image-20.png"
           />
 
           <h2 className="w-full [font-family:'Inter',Helvetica] font-medium text-white text-[28px] md:text-[36px] lg:text-[42px] text-center tracking-[0] leading-[1.3] mb-[40px] md:mb-[60px]">
@@ -1466,7 +1466,7 @@ export const Desktop = (): JSX.Element => {
               <img
                 className="w-full h-auto object-contain"
                 alt="WhatsApp"
-                src="image-42.png"
+                src="/neuron/image-42.png"
               />
             </a>
 
