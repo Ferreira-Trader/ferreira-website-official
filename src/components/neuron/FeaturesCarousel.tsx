@@ -13,7 +13,7 @@ const features = [
 
 • Nível de confiança: pra você saber o peso da oportunidade 
 Sem achismo. Leitura técnica traduzida em linguagem clara.`,
-    image: 'analiseneuralgrafico.png',
+    image: '/neuron/analiseneuralgrafico.png',
     alt: 'Oportunidad de Compra',
   },
   {
@@ -27,7 +27,7 @@ Sem achismo. Leitura técnica traduzida em linguagem clara.`,
 • Análise instantânea enquanto você opera
 
 Mais agilidade na hora das suas operações.`,
-    image: 'analisecorretora.png',
+    image: '/neuron/analisecorretora.png',
     alt: 'Análise Neural de Gráficos',
   },
   {
@@ -43,7 +43,7 @@ Mais agilidade na hora das suas operações.`,
 • Confirmação: candle ou padrão que dá o "ok" final
 
 Você não precisa decorar. Precisa entender — e a Neuron te mostra.`,
-    image: 'oportunidade_.png',
+    image: '/neuron/oportunidade_.png',
     alt: 'Dashboard',
   },
   {
@@ -59,7 +59,7 @@ Você não precisa decorar. Precisa entender — e a Neuron te mostra.`,
 • Comparativo semanal e mensal
 
 • Você não melhora o que não mede. O dashboard mostra onde você tá ganhando — e onde tá errando.`,
-    image: 'dashboardd.png',
+    image: '/neuron/dashboardd.png',
     alt: 'Oportunidad de Compra 2',
   },
   {
@@ -77,7 +77,7 @@ Gestão de Risco (EM BREVE):
 • Limites diários personalizáveis
 
 Consistência é técnica + autoconhecimento + proteção.`,
-    image: 'diarioneural.png',
+    image: '/neuron/diarioneural.png',
     alt: 'Imagem Neural de Gráficos',
   },
 ];

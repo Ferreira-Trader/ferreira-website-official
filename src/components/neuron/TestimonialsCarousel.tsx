@@ -3,15 +3,15 @@ import useEmblaCarousel from 'embla-carousel-react';
 import AutoScroll from 'embla-carousel-auto-scroll';
 
 const testimonials = [
-  "feesback1.png",
-  "feesback2.png",
-  "feesback3.png",
-  "feesback4.png",
-  "feesback5.png",
-  "feesback6.png",
-  "feesback7.png",
-  "feesback8.jpg",
-  "feesback9.jpg",
+  "/neuron/feesback1.png",
+  "/neuron/feesback2.png",
+  "/neuron/feesback3.png",
+  "/neuron/feesback4.png",
+  "/neuron/feesback5.png",
+  "/neuron/feesback6.png",
+  "/neuron/feesback7.png",
+  "/neuron/feesback8.jpg",
+  "/neuron/feesback9.jpg",
 ];
 
 const repeatedTestimonials = [
