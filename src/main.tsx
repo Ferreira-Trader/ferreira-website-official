@@ -11,7 +11,7 @@ createRoot(document.getElementById("app") as HTMLElement).render(
       <Routes>
         <Route path="/neuron" element={<NeuronPage />} />
         <Route path="/ferreiraflix" element={<FerreiraFlixPage />} />
-        <Route path="*" element={<Navigate to="/neuron" replace />} />
+        <Route path="*" element={null} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
