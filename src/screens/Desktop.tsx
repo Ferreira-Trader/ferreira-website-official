@@ -286,7 +286,7 @@ const pricingPlans = [
     priceMain: "R$797",
     priceDecimal: ",00",
     period: "/6 meses",
-    description: "Economia de 32%",
+    description: "Economia de 33%",
     savings: "R$133 /mês",
     features: [
       "10.800 análises por semestre",
@@ -366,6 +366,35 @@ export const Desktop = (): JSX.Element => {
   const [activeHowItWorksTab, setActiveHowItWorksTab] = useState<number>(0);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
+  const [showFloatingBtn, setShowFloatingBtn] = useState<boolean>(false);
+  const userPausedRef = useRef<boolean>(false);
+
+  const toggleVideo = () => {
+    const video = videoRef.current;
+    if (!video) return;
+    if (video.paused) {
+      userPausedRef.current = false;
+      video.play().then(() => setIsVideoPlaying(true)).catch(() => {});
+    } else {
+      userPausedRef.current = true;
+      video.pause();
+      setIsVideoPlaying(false);
+    }
+  };
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const onScroll = () => {
+      const rect = video.getBoundingClientRect();
+      const videoVisible = rect.top < window.innerHeight && rect.bottom > 0;
+      setShowFloatingBtn(!videoVisible);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   useEffect(() => {
     const video = videoRef.current;
@@ -384,20 +413,7 @@ export const Desktop = (): JSX.Element => {
     attemptAutoplay();
 
     const handleUserInteraction = () => {
-      if (!isVideoPlaying && video.paused) {
-        video.play().then(() => {
-          setIsVideoPlaying(true);
-        }).catch(() => {});
-      }
-    };
-
-    const handleScroll = () => {
-      if (!video || isVideoPlaying) return;
-
-      const rect = video.getBoundingClientRect();
-      const isInViewport = rect.top >= 0 && rect.bottom <= window.innerHeight;
-
-      if (isInViewport && video.paused) {
+      if (video.paused && !userPausedRef.current) {
         video.play().then(() => {
           setIsVideoPlaying(true);
         }).catch(() => {});
@@ -406,18 +422,45 @@ export const Desktop = (): JSX.Element => {
 
     document.addEventListener('click', handleUserInteraction, { once: true });
     document.addEventListener('touchstart', handleUserInteraction, { once: true });
-    window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       document.removeEventListener('click', handleUserInteraction);
       document.removeEventListener('touchstart', handleUserInteraction);
-      window.removeEventListener('scroll', handleScroll);
     };
-  }, [isVideoPlaying]);
+  }, []);
 
   return (
     <div className="overflow-hidden bg-[linear-gradient(180deg,rgba(2,6,20,1)_0%,rgba(1,4,13,1)_57%,rgba(0,0,0,1)_100%)] w-full min-h-[10586px] relative">
       <PurchaseNotifications />
+
+      {showFloatingBtn && (
+        <button
+          onClick={(e) => { e.stopPropagation(); toggleVideo(); }}
+          className="fixed bottom-6 left-6 z-50 w-16 h-16 rounded-full bg-[#00bcff]/90 hover:bg-[#00bcff] text-black flex items-center justify-center shadow-[0_0_20px_rgba(0,188,255,0.5)] transition-all duration-300 hover:scale-110 backdrop-blur-sm group"
+          aria-label={isVideoPlaying ? "Pausar vídeo" : "Reproduzir vídeo"}
+        >
+          <svg className="absolute inset-0 w-full h-full animate-[spin_8s_linear_infinite]" viewBox="0 0 100 100">
+            <defs>
+              <path id="circlePath" d="M 50,50 m -35,0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" />
+            </defs>
+            <text fill="#000" fontSize="11" fontWeight="700" fontFamily="Inter, Helvetica, sans-serif" letterSpacing="3">
+              <textPath href="#circlePath">
+                {isVideoPlaying ? "PAUSAR VIDEO \u2022 PAUSAR VIDEO \u2022 " : "PLAY VIDEO \u2022 PLAY VIDEO \u2022 PLAY \u2022 "}
+              </textPath>
+            </text>
+          </svg>
+          {isVideoPlaying ? (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="relative z-10">
+              <rect x="6" y="4" width="4" height="16" rx="1" />
+              <rect x="14" y="4" width="4" height="16" rx="1" />
+            </svg>
+          ) : (
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="relative z-10">
+              <polygon points="5,3 19,12 5,21" />
+            </svg>
+          )}
+        </button>
+      )}
 
       <header className="flex flex-col items-center pt-[100px] md:pt-[149px] px-4 relative">
         <div className="absolute inset-0 overflow-hidden pointer-events-none hidden md:block">
