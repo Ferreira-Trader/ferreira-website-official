@@ -12,6 +12,8 @@ import { FeaturesCarousel } from "../components/neuron/FeaturesCarousel";
 import { TestimonialsCarousel } from "../components/neuron/TestimonialsCarousel";
 import { PurchaseNotifications } from "../components/neuron/PurchaseNotifications";
 import { StatsBadgesCarousel } from "../components/neuron/StatsBadgesCarousel";
+import { useUTMTracking } from "../hooks/useUTMTracking";
+import { useCampaignId } from "../hooks/useCampaignId";
 
 const smoothScrollTo = (elementId: string) => {
   const element = document.getElementById(elementId);
@@ -363,6 +365,8 @@ const faqItems = [
 ]; 
 
 export const Desktop = (): JSX.Element => {
+  useCampaignId('2025-03-neuron-vendas');
+  const { getUrlWithUTMs } = useUTMTracking();
   const [activeHowItWorksTab, setActiveHowItWorksTab] = useState<number>(0);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState<boolean>(false);
@@ -1419,14 +1423,14 @@ export const Desktop = (): JSX.Element => {
 
                 {plan.highlighted ? (
                   <Button
-                    onClick={() => plan.url && window.open(plan.url, '_blank')}
+                    onClick={() => plan.url && window.open(getUrlWithUTMs(plan.url), '_blank')}
                     className="w-full max-w-[290px] h-[54px] mx-auto block rounded-[100px] bg-[linear-gradient(90deg,rgba(0,188,255,1)_0%,rgba(0,224,214,1)_100%)] [font-family:'Inter',Helvetica] font-black text-[#010510] text-[16px] shadow-[0_0_30px_rgba(0,188,255,0.6),0_4px_20px_rgba(0,188,255,0.4)] hover:shadow-[0_0_50px_rgba(0,224,214,0.8),0_8px_30px_rgba(0,188,255,0.6)] hover:scale-[1.05] hover:brightness-110 transition-all duration-300 relative overflow-hidden before:absolute before:inset-0 before:bg-[linear-gradient(45deg,transparent_30%,rgba(255,255,255,0.3)_50%,transparent_70%)] before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700"
                   >
                     {plan.buttonText}
                   </Button>
                 ) : (
                   <Button
-                    onClick={() => plan.url && window.open(plan.url, '_blank')}
+                    onClick={() => plan.url && window.open(getUrlWithUTMs(plan.url), '_blank')}
                     className="w-full max-w-[290px] h-[54px] mx-auto block rounded-[100px] bg-[linear-gradient(135deg,rgba(30,30,35,1)_0%,rgba(20,20,25,1)_100%)] border-[2px] border-[#505050] [font-family:'Inter',Helvetica] font-bold text-white text-[15px] shadow-[0_4px_15px_rgba(0,0,0,0.3)] hover:bg-[linear-gradient(135deg,rgba(0,188,255,0.1)_0%,rgba(0,224,214,0.05)_100%)] hover:border-[#00bcff] hover:shadow-[0_0_25px_rgba(0,188,255,0.4),0_4px_20px_rgba(0,188,255,0.3)] hover:scale-[1.03] hover:text-[#00e0d6] transition-all duration-300 relative overflow-hidden before:absolute before:inset-0 before:bg-[linear-gradient(45deg,transparent_30%,rgba(0,188,255,0.1)_50%,transparent_70%)] before:translate-x-[-100%] hover:before:translate-x-[100%] before:transition-transform before:duration-700"
                   >
                     {plan.buttonText}
