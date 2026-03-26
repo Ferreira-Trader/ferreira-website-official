@@ -281,7 +281,7 @@ const pricingPlans = [
     buttonText: "Assinar Mensal",
     buttonVariant: "secondary" as const,
     highlighted: false,
-    url: "https://checkout.ferreiratrader.com.br/subscribe/a142bf91-6829-497e-be25-4a106acc32ba",
+    url: "https://pay.hotmart.com/J101304792C?off=ekltzx4x&checkoutMode=10",
   },
   {
     name: "Semestral",
@@ -289,7 +289,7 @@ const pricingPlans = [
     priceDecimal: ",00",
     period: "/6 meses",
     description: "Economia de 33%",
-    savings: "R$133 /mês",
+    savings: "R$150 /mês",
     features: [
       "10.800 análises por semestre",
       "Análise de I.A Gráfico",
@@ -305,7 +305,7 @@ const pricingPlans = [
     buttonText: "Assinar Semestral!",
     buttonVariant: "secondary" as const,
     highlighted: false,
-    url: "https://checkout.ferreiratrader.com.br/subscribe/a142c1d6-056f-4706-9cfd-ce8d90bdc833",
+    url: "https://pay.hotmart.com/J101304792C?off=bufyhe1i&checkoutMode=10",
   },
   {
     name: "Anual",
@@ -313,7 +313,7 @@ const pricingPlans = [
     priceDecimal: ",00",
     period: "/ano",
     description: "Economia de 58%",
-    savings: "R$83 /mês",
+    savings: "R$104 /mês",
     features: [
       "23.000 análises por ano",
       "Análise de I.A Gráfico",
@@ -329,7 +329,7 @@ const pricingPlans = [
     buttonVariant: "default" as const,
     highlighted: true,
     badge: "Mais Popular",
-    url: "https://checkout.ferreiratrader.com.br/subscribe/a142bd0b-87a5-4608-afb3-0f1cb4c44720",
+    url: "https://pay.hotmart.com/J101304792C?off=5fmjsj6x&checkoutMode=10",
   },
 ];
 
