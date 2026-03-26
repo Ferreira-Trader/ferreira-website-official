@@ -437,6 +437,26 @@ export const Desktop = (): JSX.Element => {
     <div className="overflow-hidden bg-[linear-gradient(180deg,rgba(2,6,20,1)_0%,rgba(1,4,13,1)_57%,rgba(0,0,0,1)_100%)] w-full min-h-[10586px] relative">
       <PurchaseNotifications />
 
+      <a
+        href="https://api.whatsapp.com/send?phone=5521923670493&text=Oi!%20Estou%20no%20site%20da%20Neuron%20e%20tenho%20uma%20d%C3%BAvida%2C%20pode%20me%20ajudar%3F"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed left-6 top-8 z-50 animate-swing"
+      >
+        <div className="relative w-16 h-16 bg-gradient-to-br from-[#25D366] to-[#128C7E] rounded-[20px] flex items-center justify-center shadow-[0_8px_24px_rgba(37,211,102,0.4)] hover:shadow-[0_12px_32px_rgba(37,211,102,0.6)] transition-shadow duration-300">
+          <svg
+            viewBox="0 0 32 32"
+            fill="white"
+            className="w-9 h-9"
+          >
+            <path d="M16.002 3.2c-7.066 0-12.8 5.734-12.8 12.8 0 2.262.587 4.395 1.613 6.24l-1.707 6.24 6.4-1.68c1.76.933 3.76 1.44 5.867 1.44 7.066 0 12.8-5.734 12.8-12.8s-5.734-12.8-12.8-12.8zm0 23.467c-1.92 0-3.733-.507-5.28-1.387l-.373-.213-3.84 1.013 1.013-3.733-.24-.4c-.96-1.6-1.493-3.467-1.493-5.413 0-5.867 4.773-10.667 10.667-10.667s10.667 4.8 10.667 10.667-4.8 10.667-10.667 10.667zm5.867-7.787c-.32-.16-1.893-.933-2.187-1.04-.293-.107-.507-.16-.72.16-.213.32-.827 1.04-1.013 1.253-.187.213-.373.24-.693.08-.32-.16-1.347-.507-2.56-1.6-.96-.853-1.6-1.92-1.787-2.24-.187-.32-.02-.507.133-.667.147-.147.32-.373.48-.56.16-.187.213-.32.32-.533.107-.213.053-.4-.027-.56-.08-.16-.72-1.733-.987-2.373-.267-.64-.533-.533-.72-.533h-.613c-.213 0-.56.08-.853.4-.293.32-1.12 1.093-1.12 2.667s1.147 3.093 1.307 3.307c.16.213 2.24 3.413 5.44 4.787.76.32 1.347.507 1.813.667.76.24 1.453.213 2 .133.613-.08 1.893-.773 2.16-1.52.267-.747.267-1.387.187-1.52-.08-.133-.267-.213-.587-.373z" />
+          </svg>
+          <div className="absolute -top-1 -right-1 w-5 h-5 bg-[#FF1E1E] rounded-full border-2 border-black flex items-center justify-center">
+            <span className="text-white text-[10px] font-bold">1</span>
+          </div>
+        </div>
+      </a>
+
       {showFloatingBtn && (
         <button
           onClick={(e) => { e.stopPropagation(); toggleVideo(); }}
