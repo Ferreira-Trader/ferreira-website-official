@@ -513,7 +513,7 @@ export const PginaNetflix = (): JSX.Element => {
         <img
           className="h-8 md:h-10 lg:h-12 w-auto"
           alt="Ferreiraflix"
-          src="/ferreiraflix/image copy copy.png"
+          src="/ferreiraflix/ferreiraflix-2.svg"
         />
       </div>
 
