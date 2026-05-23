@@ -203,7 +203,7 @@ export function LeadCaptureModal({ onClose }: Props) {
                   }}
                   onFocus={markFormStarted}
                   disabled={loading}
-                  className="ff-phone-input w-full px-4 py-3 bg-[#1a1a1a] border border-white/10 rounded-xl text-white focus-within:border-[#fc0820]/60 transition-colors font-['MADE_Outer_Sans',sans-serif]"
+                  className="ff-phone-input w-full px-4 py-3 bg-[#1a1a1a] border border-white/10 rounded-xl focus-within:border-[#fc0820]/60 transition-colors font-['MADE_Outer_Sans',sans-serif] [&_.PhoneInputInput]:bg-transparent [&_.PhoneInputInput]:text-white [&_.PhoneInputInput]:border-0 [&_.PhoneInputInput]:outline-none [&_.PhoneInputInput]:flex-1 [&_.PhoneInputInput]:placeholder-gray-600 [&_.PhoneInputCountrySelectArrow]:text-white/60"
                 />
                 {phoneError && (
                   <p className="mt-1 text-sm text-[#fc0820] font-['MADE_Outer_Sans',sans-serif]">
