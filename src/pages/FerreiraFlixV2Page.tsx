@@ -6,7 +6,7 @@ import { useCampaignId } from "../hooks/useCampaignId";
 import { LeadCaptureProvider } from "../components/ferreiraflix/LeadCaptureProvider";
 
 export function FerreiraFlixV2Page() {
-  useCampaignId('2026-05-ferreiraflix-v2-vendas');
+  useCampaignId('2026-05-ferreiraflix-v2');
   useUTMTracking();
 
   useEffect(() => {

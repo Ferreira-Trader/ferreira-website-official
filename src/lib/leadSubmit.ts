@@ -3,7 +3,7 @@ import { getCapturedUTMs } from '../hooks/useUTMTracking';
 const APPS_SCRIPT_URL =
   'https://script.google.com/macros/s/AKfycbzdMLVS2FB7Kr5tGnr39jhY_TmUsRk7CPdIxKTlZBuwbXYDQ9IKvYdBaSs-quwsRdR3Fw/exec';
 
-const CAMPAIGN_ID = '2026-05-ferreiraflix-v2-vendas';
+const CAMPAIGN_ID = '2026-05-ferreiraflix-v2';
 
 export interface LeadData {
   name: string;
