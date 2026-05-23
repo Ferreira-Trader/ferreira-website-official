@@ -3,6 +3,7 @@ import { CheckCircle, X } from 'lucide-react';
 import PhoneInput, { isValidPhoneNumber } from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { submitLead } from '../../lib/leadSubmit';
+import { submitToDataCrazy } from '../../lib/dataCrazy';
 import { generateTransactionId } from '../../lib/transactionId';
 import { buildHotmartCheckoutUrl } from '../../lib/hotmartCheckout';
 import { getCapturedUTMs } from '../../hooks/useUTMTracking';
@@ -69,29 +70,23 @@ export function LeadCaptureModal({ onClose }: Props) {
     const phoneDigits = phone.replace(/\D/g, '');
 
     try {
-      await submitLead(
-        {
-          name: name.trim(),
-          email: email.trim(),
-          phone: phoneDigits,
-        },
-        transactionId,
-      );
-
-      trackFormSuccess(FORM_NAME, transactionId, utms, {
+      const lead = {
         name: name.trim(),
         email: email.trim(),
         phone: phoneDigits,
-      });
+      };
+
+      await Promise.allSettled([
+        submitLead(lead, transactionId),
+        submitToDataCrazy(lead),
+      ]);
+
+      trackFormSuccess(FORM_NAME, transactionId, utms, lead);
 
       setSubmitted(true);
 
       setTimeout(() => {
-        window.location.href = buildHotmartCheckoutUrl({
-          name: name.trim(),
-          email: email.trim(),
-          phone: phoneDigits,
-        });
+        window.location.href = buildHotmartCheckoutUrl(lead);
       }, 1200);
     } catch (err) {
       const errorMsg = err instanceof Error ? err.message : 'Erro desconhecido';
