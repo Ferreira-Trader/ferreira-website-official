@@ -1,12 +1,9 @@
 import { getCapturedUTMs } from '../hooks/useUTMTracking';
 
-const APPS_SCRIPT_URL = import.meta.env.VITE_LEAD_APPS_SCRIPT_URL as string | undefined;
+const APPS_SCRIPT_URL =
+  'https://script.google.com/macros/s/AKfycbzdMLVS2FB7Kr5tGnr39jhY_TmUsRk7CPdIxKTlZBuwbXYDQ9IKvYdBaSs-quwsRdR3Fw/exec';
 
-const readCookie = (name: string): string | undefined => {
-  if (typeof document === 'undefined') return undefined;
-  const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]+)`));
-  return match ? decodeURIComponent(match[1]) : undefined;
-};
+const CAMPAIGN_ID = '2026-05-ferreiraflix-v2-vendas';
 
 export interface LeadData {
   name: string;
@@ -14,40 +11,45 @@ export interface LeadData {
   phone: string;
 }
 
-export async function submitLead(data: LeadData, eventID: string): Promise<boolean> {
-  if (!APPS_SCRIPT_URL) {
-    console.warn('[leadSubmit] VITE_LEAD_APPS_SCRIPT_URL não configurada — lead não persistido');
-    return false;
-  }
+interface AppsScriptPayload {
+  utm_source: string;
+  utm_medium: string;
+  utm_campaign: string;
+  utm_content: string;
+  utm_term: string;
+  campaign: string;
+  name: string;
+  email: string;
+  phone: string;
+}
 
+// `eventID` permanece no parâmetro para uso futuro pelo CRM/CAPI, mas o
+// Apps Script V2 só guarda os 9 campos abaixo na ordem da planilha.
+export async function submitLead(data: LeadData, _eventID: string): Promise<boolean> {
   const utms = getCapturedUTMs();
 
-  const payload = {
-    nome: data.name,
-    email: data.email,
-    telefone: data.phone,
-    source: 'ferreiraflix-v2',
-    campaign: '2026-05-ferreiraflix-v2-vendas',
+  const payload: AppsScriptPayload = {
     utm_source: utms.utm_source || '',
     utm_medium: utms.utm_medium || '',
     utm_campaign: utms.utm_campaign || '',
     utm_content: utms.utm_content || '',
     utm_term: utms.utm_term || '',
-    eventID,
-    source_url: window.location.href,
-    fbc: readCookie('_fbc'),
-    fbp: readCookie('_fbp'),
-    timestamp: new Date().toISOString(),
+    campaign: CAMPAIGN_ID,
+    name: data.name,
+    email: data.email,
+    phone: data.phone,
   };
 
   try {
-    await fetch(APPS_SCRIPT_URL, {
+    const response = await fetch(APPS_SCRIPT_URL, {
       method: 'POST',
-      mode: 'no-cors',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8',
+      },
       body: JSON.stringify(payload),
+      redirect: 'follow',
     });
-    return true;
+    return response.ok;
   } catch (error) {
     console.error('[leadSubmit] Erro ao enviar para Apps Script:', error);
     return false;
