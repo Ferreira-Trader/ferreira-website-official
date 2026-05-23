@@ -7,6 +7,9 @@ import { submitToDataCrazy } from '../../lib/dataCrazy';
 import { generateTransactionId } from '../../lib/transactionId';
 import { buildHotmartCheckoutUrl } from '../../lib/hotmartCheckout';
 import { getCapturedUTMs } from '../../hooks/useUTMTracking';
+import { useEmailSuggestion } from '../../hooks/useEmailSuggestion';
+
+const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 import {
   trackFormStart,
   trackFormSuccess,
@@ -23,6 +26,7 @@ interface Props {
 export function LeadCaptureModal({ onClose }: Props) {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+  const [emailError, setEmailError] = useState('');
   const [phone, setPhone] = useState('');
   const [phoneError, setPhoneError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -30,6 +34,9 @@ export function LeadCaptureModal({ onClose }: Props) {
   const [error, setError] = useState('');
   const [formStarted, setFormStarted] = useState(false);
   const isSubmittingRef = useRef(false);
+
+  const { suggestion, checkEmail, applySuggestion, clearSuggestion } =
+    useEmailSuggestion();
 
   const getFilledFields = useCallback(() => {
     const fields: string[] = [];
@@ -51,9 +58,42 @@ export function LeadCaptureModal({ onClose }: Props) {
     }
   };
 
+  const validateEmail = (value: string): string => {
+    const trimmed = value.trim();
+    if (!trimmed) return 'Email é obrigatório';
+    if (!EMAIL_REGEX.test(trimmed)) return 'Email inválido';
+    return '';
+  };
+
+  const handleEmailBlur = () => {
+    const err = validateEmail(email);
+    setEmailError(err);
+    if (!err) checkEmail(email.trim());
+  };
+
+  const handlePhoneBlur = () => {
+    if (phone && !isValidPhoneNumber(phone)) {
+      setPhoneError('Número de telefone inválido');
+    }
+  };
+
+  const handleApplySuggestion = () => {
+    const corrected = applySuggestion();
+    if (corrected) {
+      setEmail(corrected);
+      setEmailError('');
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (isSubmittingRef.current) return;
+
+    const emailErr = validateEmail(email);
+    if (emailErr) {
+      setEmailError(emailErr);
+      return;
+    }
 
     if (!phone || !isValidPhoneNumber(phone)) {
       setPhoneError('Número de telefone inválido');
@@ -62,6 +102,7 @@ export function LeadCaptureModal({ onClose }: Props) {
 
     isSubmittingRef.current = true;
     setError('');
+    setEmailError('');
     setPhoneError('');
     setLoading(true);
 
@@ -172,12 +213,36 @@ export function LeadCaptureModal({ onClose }: Props) {
                   type="email"
                   required
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                    if (emailError) setEmailError('');
+                    clearSuggestion();
+                  }}
+                  onBlur={handleEmailBlur}
                   onFocus={markFormStarted}
                   disabled={loading}
-                  className="w-full px-4 py-3 bg-[#1a1a1a] border border-white/10 rounded-xl text-white placeholder-gray-600 focus:outline-none focus:border-[#fc0820]/60 transition-colors font-['MADE_Outer_Sans',sans-serif]"
+                  className={`w-full px-4 py-3 bg-[#1a1a1a] border rounded-xl text-white placeholder-gray-600 focus:outline-none transition-colors font-['MADE_Outer_Sans',sans-serif] ${
+                    emailError
+                      ? 'border-[#fc0820]/60 focus:border-[#fc0820]'
+                      : 'border-white/10 focus:border-[#fc0820]/60'
+                  }`}
                   placeholder="seu@email.com"
                 />
+                {emailError && !suggestion && (
+                  <p className="mt-1 text-sm text-[#fc0820] font-['MADE_Outer_Sans',sans-serif]">
+                    {emailError}
+                  </p>
+                )}
+                {suggestion && (
+                  <button
+                    type="button"
+                    onClick={handleApplySuggestion}
+                    className="mt-2 text-sm text-left text-amber-300 hover:text-amber-200 font-['MADE_Outer_Sans',sans-serif]"
+                  >
+                    Você quis dizer{' '}
+                    <span className="font-semibold underline">{suggestion.full}</span>? Clique para corrigir.
+                  </button>
+                )}
               </div>
 
               <div>
@@ -196,6 +261,7 @@ export function LeadCaptureModal({ onClose }: Props) {
                     setPhone(value || '');
                     setPhoneError('');
                   }}
+                  onBlur={handlePhoneBlur}
                   onFocus={markFormStarted}
                   disabled={loading}
                   placeholder="(11) 99999-9999"
