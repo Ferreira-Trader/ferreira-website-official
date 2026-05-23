@@ -13,106 +13,105 @@ interface UseUTMTrackingReturn {
 
 const EXCLUDED_DOMAINS = ['api.whatsapp.com', 'wa.me', 'ferreiratrader.link'];
 
-export const useUTMTracking = (): UseUTMTrackingReturn => {
-  const utmsRef = useRef<UTMParams>({});
-  const sckRef = useRef<string>('');
-  const initializedRef = useRef(false);
+// Estado de módulo para uso fora de React (lib/leadSubmit, lib/hotmartCheckout)
+let capturedUTMs: UTMParams = {};
+let capturedSck: string = '';
 
-  const captureUTMs = useCallback(() => {
-    let parametros = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
+function captureUTMsFromUrl(): { utms: UTMParams; sck: string } {
+  let parametros = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
 
-    // Captura parâmetros extras da URL (fbclid, gclid, etc)
-    const url = new URL(window.location.href);
-    const params = new URLSearchParams(url.search);
-    for (const [key] of params) {
-      if (!parametros.includes(key)) {
-        parametros.push(key);
-      }
+  const url = new URL(window.location.href);
+  const params = new URLSearchParams(url.search);
+  for (const [key] of params) {
+    if (!parametros.includes(key)) {
+      parametros.push(key);
     }
+  }
 
-    const urlParamsCapt = new URLSearchParams(window.location.search);
-    const referrerSearch = document.referrer ? document.referrer.split('?')[1] || '' : '';
-    const urlParamsCaptReferrer = new URLSearchParams(referrerSearch);
+  const urlParamsCapt = new URLSearchParams(window.location.search);
+  const referrerSearch = document.referrer ? document.referrer.split('?')[1] || '' : '';
+  const urlParamsCaptReferrer = new URLSearchParams(referrerSearch);
 
-    const utms: UTMParams = {};
+  const utms: UTMParams = {};
 
-    parametros.forEach(param => {
-      if (param === 'utm_source') {
-        // Fallback: URL > Referrer UTM > Hostname do Referrer > "direto"
-        const fromUrl = urlParamsCapt.get(param);
-        const fromReferrer = urlParamsCaptReferrer.get(param);
-        if (fromUrl) {
-          utms[param] = fromUrl;
-        } else if (fromReferrer) {
-          utms[param] = fromReferrer;
-        } else if (document.referrer) {
-          try {
-            utms[param] = new URL(document.referrer).hostname;
-          } catch {
-            utms[param] = 'direto';
-          }
-        } else {
+  parametros.forEach(param => {
+    if (param === 'utm_source') {
+      const fromUrl = urlParamsCapt.get(param);
+      const fromReferrer = urlParamsCaptReferrer.get(param);
+      if (fromUrl) {
+        utms[param] = fromUrl;
+      } else if (fromReferrer) {
+        utms[param] = fromReferrer;
+      } else if (document.referrer) {
+        try {
+          utms[param] = new URL(document.referrer).hostname;
+        } catch {
           utms[param] = 'direto';
         }
       } else {
-        const value = urlParamsCapt.get(param) ?? urlParamsCaptReferrer.get(param) ?? '';
-        if (value) {
-          utms[param] = value;
-        }
+        utms[param] = 'direto';
       }
-    });
-
-    // Gera SCK (valores concatenados com |, sem duplicatas)
-    const sckValues = Object.values(utms).filter(value => value !== '' && value !== 'direto');
-    const currentSck = urlParamsCapt.get('sck');
-    let currentSckValues: string[] = [];
-    if (currentSck) {
-      currentSckValues = currentSck.split('|');
+    } else {
+      const value = urlParamsCapt.get(param) ?? urlParamsCaptReferrer.get(param) ?? '';
+      if (value) {
+        utms[param] = value;
+      }
     }
-    const filteredSckValues = sckValues.filter(value => !currentSckValues.includes(value));
-    const sck = filteredSckValues.length > 0 ? filteredSckValues.join('|') : '';
+  });
 
-    utmsRef.current = utms;
-    sckRef.current = sck;
-    return { utms, sck };
-  }, []);
+  const sckValues = Object.values(utms).filter(value => value !== '' && value !== 'direto');
+  const currentSck = urlParamsCapt.get('sck');
+  let currentSckValues: string[] = [];
+  if (currentSck) {
+    currentSckValues = currentSck.split('|');
+  }
+  const filteredSckValues = sckValues.filter(value => !currentSckValues.includes(value));
+  const sck = filteredSckValues.length > 0 ? filteredSckValues.join('|') : '';
 
-  // Gera URL com UTMs anexados
-  const getUrlWithUTMs = useCallback((baseUrl: string): string => {
-    try {
-      const url = new URL(baseUrl);
-      const searchParams = new URLSearchParams(url.search);
-      for (const key in utmsRef.current) {
-        if (!searchParams.has(key) && utmsRef.current[key]) {
-          searchParams.set(key, utmsRef.current[key]);
-        }
+  capturedUTMs = utms;
+  capturedSck = sck;
+
+  return { utms, sck };
+}
+
+export function getCapturedUTMs(): UTMParams {
+  return { ...capturedUTMs };
+}
+
+export function getCapturedSck(): string {
+  return capturedSck;
+}
+
+export function getUrlWithUTMs(baseUrl: string): string {
+  try {
+    const url = new URL(baseUrl);
+    const searchParams = new URLSearchParams(url.search);
+    for (const key in capturedUTMs) {
+      if (!searchParams.has(key) && capturedUTMs[key]) {
+        searchParams.set(key, capturedUTMs[key]);
       }
-      if (!searchParams.has('sck') && sckRef.current) {
-        searchParams.set('sck', sckRef.current);
-      }
-      const queryString = searchParams.toString();
-      return queryString ? `${url.origin}${url.pathname}?${queryString}` : `${url.origin}${url.pathname}`;
-    } catch {
-      return baseUrl;
     }
-  }, []);
+    if (!searchParams.has('sck') && capturedSck) {
+      searchParams.set('sck', capturedSck);
+    }
+    const queryString = searchParams.toString();
+    return queryString ? `${url.origin}${url.pathname}?${queryString}` : `${url.origin}${url.pathname}`;
+  } catch {
+    return baseUrl;
+  }
+}
 
-  // Redireciona para URL com UTMs
-  const redirectWithUTMs = useCallback((baseUrl: string): void => {
-    window.location.href = getUrlWithUTMs(baseUrl);
-  }, [getUrlWithUTMs]);
+export const useUTMTracking = (): UseUTMTrackingReturn => {
+  const initializedRef = useRef(false);
 
-  // Atualiza automaticamente TODOS os links <a> da página
   const updateAllLinks = useCallback(() => {
-    const utms = utmsRef.current;
-    const sck = sckRef.current;
+    const utms = capturedUTMs;
+    const sck = capturedSck;
 
     document.querySelectorAll('a').forEach((el: HTMLAnchorElement) => {
       try {
         const elURL = new URL(el.href);
-        // Ignora domínios que não processam UTMs
         if (EXCLUDED_DOMAINS.some(d => elURL.hostname.includes(d))) return;
-        // Ignora âncoras internas, javascript:, mailto:, tel:
         if (elURL.hash && elURL.pathname === window.location.pathname) return;
         if (el.href.startsWith('javascript:') || el.href.startsWith('mailto:') || el.href.startsWith('tel:')) return;
 
@@ -135,10 +134,9 @@ export const useUTMTracking = (): UseUTMTrackingReturn => {
     });
   }, []);
 
-  // Atualiza automaticamente TODOS os iframes da página
   const updateAllIframes = useCallback(() => {
-    const utms = utmsRef.current;
-    const sck = sckRef.current;
+    const utms = capturedUTMs;
+    const sck = capturedSck;
 
     document.querySelectorAll('iframe').forEach((iframe: HTMLIFrameElement) => {
       const actualSrc = iframe.getAttribute('data-src') || iframe.src;
@@ -170,12 +168,11 @@ export const useUTMTracking = (): UseUTMTrackingReturn => {
     });
   }, []);
 
-  // Inicialização + MutationObserver para elementos dinâmicos
   useEffect(() => {
     if (initializedRef.current) return;
     initializedRef.current = true;
 
-    captureUTMs();
+    captureUTMsFromUrl();
 
     const updateAll = () => {
       updateAllLinks();
@@ -188,7 +185,6 @@ export const useUTMTracking = (): UseUTMTrackingReturn => {
       window.addEventListener('load', updateAll);
     }
 
-    // Observer para links/iframes adicionados dinâmicamente
     const observer = new MutationObserver((mutations) => {
       let shouldUpdate = false;
       mutations.forEach((mutation) => {
@@ -210,13 +206,18 @@ export const useUTMTracking = (): UseUTMTrackingReturn => {
       window.removeEventListener('load', updateAll);
       observer.disconnect();
     };
-  }, [captureUTMs, updateAllLinks, updateAllIframes]);
+  }, [updateAllLinks, updateAllIframes]);
+
+  const getUrlWithUTMsCallback = useCallback((baseUrl: string) => getUrlWithUTMs(baseUrl), []);
+  const redirectWithUTMs = useCallback((baseUrl: string): void => {
+    window.location.href = getUrlWithUTMs(baseUrl);
+  }, []);
 
   return {
-    utms: utmsRef.current,
-    sck: sckRef.current,
-    getUrlWithUTMs,
-    redirectWithUTMs
+    utms: capturedUTMs,
+    sck: capturedSck,
+    getUrlWithUTMs: getUrlWithUTMsCallback,
+    redirectWithUTMs,
   };
 };
 

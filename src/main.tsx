@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { NeuronPage } from "./pages/NeuronPage";
 import { FerreiraFlixPage } from "./pages/FerreiraFlixPage";
+import { FerreiraFlixV2Page } from "./pages/FerreiraFlixV2Page";
 import "../tailwind.css";
 
 createRoot(document.getElementById("app") as HTMLElement).render(
@@ -11,6 +12,7 @@ createRoot(document.getElementById("app") as HTMLElement).render(
       <Routes>
         <Route path="/neuron" element={<NeuronPage />} />
         <Route path="/ferreiraflix" element={<FerreiraFlixPage />} />
+        <Route path="/ferreiraflix-v2" element={<FerreiraFlixV2Page />} />
         <Route path="*" element={null} />
       </Routes>
     </BrowserRouter>

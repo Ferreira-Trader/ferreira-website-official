@@ -11,7 +11,10 @@ import { useCountUp } from "../../hooks/useCountUp";
 import { BonusCarousel } from "../../components/ferreiraflix/BonusCarousel";
 import { ModulesCarousel } from "../../components/ferreiraflix/ModulesCarousel";
 import { ScrollingCandles } from "../../components/ferreiraflix/ScrollingCandles";
+import { useLeadCapture } from "../../components/ferreiraflix/LeadCaptureProvider";
 import { Plus, X } from "lucide-react";
+
+export type PginaNetflixVariant = 'default' | 'v2-lead-form';
 
 const CountUpNumber: React.FC<{ value: string }> = ({ value }) => {
   const hasPrefix = value.startsWith('+');
@@ -345,7 +348,13 @@ const faqItems = [
   },
 ];
 
-export const PginaNetflix = (): JSX.Element => {
+interface PginaNetflixProps {
+  variant?: PginaNetflixVariant;
+}
+
+export const PginaNetflix = ({ variant = 'default' }: PginaNetflixProps = {}): JSX.Element => {
+  const { openModal } = useLeadCapture();
+
   const scrollToCheckout = () => {
     (window as any).lenis?.scrollTo('#checkout-section');
   };
@@ -884,19 +893,32 @@ export const PginaNetflix = (): JSX.Element => {
                     <p className="text-white text-base">ou R$ 397,00 à vista</p>
                   </div>
 
-                  <a
-                    href="https://pay.hotmart.com/S100822439E?checkoutMode=10&sck=9fb8aa2a212342e3945ac6c59c1c0b44-9f79dcadd9a4473484a804455aafd6a9&"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full"
-                  >
-                    <Button className="w-full h-16 md:h-[70px] rounded-full bg-[#fc0820] hover:bg-[#fc0820]/90 text-base md:text-lg relative overflow-hidden cursor-pointer">
+                  {variant === 'v2-lead-form' ? (
+                    <button
+                      type="button"
+                      onClick={openModal}
+                      className="w-full h-16 md:h-[70px] rounded-full bg-[#fc0820] hover:bg-[#fc0820]/90 text-base md:text-lg relative overflow-hidden cursor-pointer transition-colors"
+                    >
                       <span className="absolute inset-0 animate-shine bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none"></span>
                       <span className="font-['MADE_Outer_Sans',sans-serif] font-normal text-white relative z-10 pointer-events-none">
                         Liberar meu acesso agora
                       </span>
-                    </Button>
-                  </a>
+                    </button>
+                  ) : (
+                    <a
+                      href="https://pay.hotmart.com/S100822439E?checkoutMode=10&sck=9fb8aa2a212342e3945ac6c59c1c0b44-9f79dcadd9a4473484a804455aafd6a9&"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full"
+                    >
+                      <Button className="w-full h-16 md:h-[70px] rounded-full bg-[#fc0820] hover:bg-[#fc0820]/90 text-base md:text-lg relative overflow-hidden cursor-pointer">
+                        <span className="absolute inset-0 animate-shine bg-gradient-to-r from-transparent via-white/40 to-transparent pointer-events-none"></span>
+                        <span className="font-['MADE_Outer_Sans',sans-serif] font-normal text-white relative z-10 pointer-events-none">
+                          Liberar meu acesso agora
+                        </span>
+                      </Button>
+                    </a>
+                  )}
 
                   <img
                     className="w-52 md:w-48 mt-2"
