@@ -25,6 +25,47 @@ Se a sessão for **interrompida no meio**, marcar no título `— INCOMPLETA` e 
 
 ---
 
+## 2026-05-23 — Documentação operacional + template + agents customizados Claude
+
+**Objetivo**: estabelecer estrutura padronizada de documentação Claude para este repo e criar template reutilizável em `~/aiprojects/templates/claude-repo-template/` com agents customizados instaláveis globalmente.
+
+**Branch**: `main`
+
+**Commits**:
+- `b940912` Adiciona CLAUDE.md com guia operacional do projeto
+- `39b30b3` Adiciona SESSION_LOG cronológico e PROMPT_RETOMADA estilo galltek
+- `f731501` Adiciona .claude/settings.json e completa estrutura via init.sh do template
+
+**Tijolos fechados**:
+- `CLAUDE.md` raiz com stack, comandos, rotas, big-picture, padrões de tracking/captura, convenções, integrações externas e ritual de início.
+- `docs/SESSION_LOG.md` (diário cronológico estilo galltek).
+- `docs/PROMPT_RETOMADA.md` com prompt universal + 5 variações (auditoria read-only, feature interrompida, página nova, lead que não chegou, troca de URL Hotmart).
+- `docs/SESSION_LOGS/.gitkeep` para o diretório existir mesmo vazio.
+- `.claude/settings.json` com 3 níveis (allow/deny/ask) gerado via `init.sh` do template.
+- `.gitignore` atualizado para ignorar `.claude/settings.local.json` e `.mcp.json`.
+- Template reutilizável criado em `~/aiprojects/templates/claude-repo-template/`: 3 .tpl (CLAUDE/SESSION_LOG/PROMPT_RETOMADA), `.claude/settings.json.tpl`, `.gitignore.tpl`, 3 agents reutilizáveis (session-resumer, session-logger, commit-writer), 3 agents específicos Ferreira (tracking-auditor, lead-debugger, page-cloner), `init.sh`, `install-agents.sh` e `README.md`.
+- `~/.claude/settings.json` global refatorado: allow genérico seguro (git read-only, gh read, ls/cat/grep/rg, npm build/test/lint, docker compose up, MCPs aprovados), deny agressivo (rm -rf, sudo, git push --force, git reset --hard, --no-verify, npm publish, supabase db reset, leitura de .env/.credentials), ask para operações destrutivas/deploy (git push/commit, gh pr create/merge, wrangler deploy, vercel deploy).
+- Backup do settings antigo salvo em `~/.claude/settings.json.backup-20260603-181528`.
+- 6 agents instalados em `~/.claude/agents/` via `install-agents.sh --global --ferreira`.
+
+**Tijolos em andamento / incompletos**: nenhum.
+
+**Decisões**:
+- **Padrão galltek de documentação operacional** adotado (CLAUDE.md + SESSION_LOG.md + SESSION_LOGS/ + PROMPT_RETOMADA.md) por ser auditável, versionado e reusável entre máquinas/devs.
+- **Template em diretório separado** (`~/aiprojects/templates/claude-repo-template/`) em vez de dentro do repo Ferreira — permite reuso nos demais repos do user (galltek, alfa-lista-espera, diagnostico).
+- **Agents Ferreira ficam globais** (`~/.claude/agents/`) e não no repo — servem para todos os sites Ferreira, não só ferreira-website-official.
+- **Settings em 3 níveis (allow/deny/ask)** preferível ao "tudo allow" anterior — define autonomia com ressalvas de forma explícita; deny vence ask vence allow.
+- **MCPs globais autorizados em massa** (sequential-thinking, brave-search, context7, memory, semgrep, github, ClickUp, Notion, Gmail, Google Drive, Calendar, Figma, SupaBase-CJ, playwright, Meta Ads).
+
+**Pendências pra próxima sessão**:
+- Validar em uso real os agents customizados (session-resumer no início, session-logger no fim, commit-writer antes de cada commit).
+- Replicar `init.sh` nos outros repos Ferreira (alfa-lista-espera, diagnostico) para herdar a estrutura.
+- Considerar versionar `~/aiprojects/templates/claude-repo-template/` num repo privado para sincronizar entre máquinas.
+
+**Próximo passo sugerido**: na próxima sessão neste repo, abrir com "retoma a sessão" e validar que o `session-resumer` é convocado automaticamente.
+
+---
+
 ## 2026-05-23 — FerreiraFlix v2: rota com captura de lead via modal popup
 
 **Objetivo**: criar `/ferreiraflix-v2` como variação da `/ferreiraflix` em que o botão "Liberar meu acesso agora" abre modal coletando nome/email/telefone com DDI; submit grava lead no Apps Script + DataCrazy CRM e redireciona ao Hotmart pré-populado preservando UTMs.
