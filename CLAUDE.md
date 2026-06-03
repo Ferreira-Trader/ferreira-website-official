@@ -83,9 +83,11 @@ Padrão herdado de [ferreira-alfa-lista-espera](../ferreira-alfa-lista-espera) e
 - [src/screens/PginaNetflix/PginaNetflix.tsx](src/screens/PginaNetflix/PginaNetflix.tsx) — componente principal (1038 linhas), aceita prop `variant`.
 - [src/screens/Desktop.tsx](src/screens/Desktop.tsx) — componente principal da Neuron.
 
-### Histórico
-- [docs/SESSION_LOGS/](docs/SESSION_LOGS/) — log de sessões de trabalho (formato padrão galltek).
-- [GUIA-TRACKING-PADRAO.md](GUIA-TRACKING-PADRAO.md) — guia mestre de tracking Ferreira (referência para qualquer site).
+### Documentação operacional
+- [docs/SESSION_LOG.md](docs/SESSION_LOG.md) — **diário cronológico** de sessões (mais recente no topo). Toda sessão começa lendo as 2 últimas entradas + `git log --oneline -10` e termina adicionando entrada nova.
+- [docs/PROMPT_RETOMADA.md](docs/PROMPT_RETOMADA.md) — prompt copia-cola para retomar contexto no início de cada sessão Claude (universal + variações para casos comuns).
+- [docs/SESSION_LOGS/](docs/SESSION_LOGS/) — audit detalhado por sessão (formato wave, um arquivo por entrega grande).
+- [GUIA-TRACKING-PADRAO.md](GUIA-TRACKING-PADRAO.md) — guia mestre de tracking Ferreira (referência para qualquer site da família).
 - [PLANO-TRACKING-IMPLEMENTACAO.md](PLANO-TRACKING-IMPLEMENTACAO.md) — plano original da implementação GTM.
 
 ## Convenções
@@ -151,4 +153,10 @@ Atualmente o projeto **não usa** env vars no build. Todas as URLs sensíveis (A
 - Quando um endpoint externo trocar (Apps Script, DataCrazy, GTM)
 - Quando uma convenção for revogada/criada
 
-Atualizar também [docs/SESSION_LOGS/](docs/SESSION_LOGS/) com o log da sessão.
+Sempre que esse arquivo for alterado, atualizar também:
+- [docs/SESSION_LOG.md](docs/SESSION_LOG.md) com entrada nova no topo (diário cronológico)
+- [docs/SESSION_LOGS/](docs/SESSION_LOGS/) com session_NN_*.md detalhado se a sessão foi grande
+
+## Iniciando uma sessão Claude
+
+Cole no chat o conteúdo de [docs/PROMPT_RETOMADA.md](docs/PROMPT_RETOMADA.md) §"Prompt universal" antes de pedir qualquer coisa. Garante que o Claude lê SESSION_LOG, confere `git status`/`git log`, e responde com sumário do estado antes de propor próximo passo.
