@@ -2,3 +2,8 @@ node_modules
 dist
 .wrangler
 *.zip
+
+# Claude Code: overrides pessoais não-versionados
+.claude/settings.local.json
+# MCP local — só commitar se NÃO tiver tokens (preferir .mcp.json.example)
+.mcp.json

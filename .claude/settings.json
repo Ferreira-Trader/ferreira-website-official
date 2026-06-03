@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Read(/home/kelvinbrit0/aiprojects/clients/ferreira-trader/ferreira-website-official/**)",
+      "Bash(npm run dev:*)",
+      "Bash(npm run build:*)",
+      "Bash(npm run preview:*)",
+      "Bash(npm run check:*)",
+      "Bash(npm run test:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm install)",
+      "Bash(npm install:*)",
+      "Bash(npm list:*)"
+    ],
+    "deny": [
+      "Read(/home/kelvinbrit0/aiprojects/clients/ferreira-trader/ferreira-website-official/.env)",
+      "Read(/home/kelvinbrit0/aiprojects/clients/ferreira-trader/ferreira-website-official/.env.*)",
+      "Read(/home/kelvinbrit0/aiprojects/clients/ferreira-trader/ferreira-website-official/**/credentials.json)",
+      "Read(/home/kelvinbrit0/aiprojects/clients/ferreira-trader/ferreira-website-official/**/secrets.json)"
+    ],
+    "ask": [
+      "Bash(git push)",
+      "Bash(git push:*)",
+      "Bash(git merge:*)",
+      "Bash(git rebase:*)",
+      "Bash(git commit:*)",
+      "Bash(git checkout:*)",
+      "Bash(gh pr create:*)",
+      "Bash(gh pr merge:*)"
+    ]
+  },
+  "env": {
+    "CLAUDE_PROJECT_NAME": "ferreira-website-official",
+    "CLAUDE_MAIN_BRANCH": "main"
+  }
+}
