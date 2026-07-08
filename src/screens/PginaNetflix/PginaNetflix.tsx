@@ -406,7 +406,7 @@ export const PginaNetflix = ({ variant = 'default' }: PginaNetflixProps = {}): J
                 src="/ferreiraflix/ferreiraflix-2.svg"
               /> 
 
-<p className="text-center lg:text-left font-['MADE_Outer_Sans',sans-serif] text-white/85 text-[19px] md:text-[28px] lg:text-[40px] leading-[120%] max-w-3xl antialiased font-semibold">
+<p className="text-center font-['MADE_Outer_Sans',sans-serif] text-white/85 text-[19px] md:text-[28px] lg:text-[40px] leading-[120%] max-w-3xl antialiased font-semibold">
   Aprenda a lucrar no mercado financeiro e <span className="text-[#FF1E1E]">faça seus primeiros <span className="text-[#FC0532] whitespace-nowrap">R$ 10.000,00</span></span> com um método validado há mais de 6 anos.
 </p>
 
@@ -714,7 +714,7 @@ export const PginaNetflix = ({ variant = 'default' }: PginaNetflixProps = {}): J
     text-white/70
     max-w-[520px]
     line-clamp-6
-    text-center lg:text-left
+    text-center
   "
 >
   Confira os resultados reais de pessoas comuns que aprenderam a fazer  <br />
@@ -939,7 +939,7 @@ export const PginaNetflix = ({ variant = 'default' }: PginaNetflixProps = {}): J
               </CardContent>
             </Card>
 
-            <article className="flex flex-col gap-6 items-center lg:items-start text-center lg:text-left">
+            <article className="flex flex-col gap-6 items-center lg:items-start text-center">
               <img
                 className="w-48 md:w-40 lg:w-48 h-auto"
                 alt="Group"
@@ -1015,18 +1015,18 @@ export const PginaNetflix = ({ variant = 'default' }: PginaNetflixProps = {}): J
                 href="https://ferreiratrader.link/suporte?text=Oi!%20Estou%20no%20site%20de%20vendas%20do%20FerreiraFlix%20e%20tenho%20uma%20d%C3%BAvida%2C%20pode%20me%20ajudar%3F"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col items-center lg:items-start gap-4 lg:col-start-1 lg:row-start-2"
+                className="flex flex-col items-center gap-4 lg:col-start-1 lg:row-start-2"
               >
                 <img
                   src="/ferreiraflix/whatsapp-logo.svg"
                   alt="WhatsApp"
                   className="w-24 h-24 md:w-40 md:h-40"
                 />
-                <div className="flex flex-col items-center lg:items-start gap-2">
-                  <p className="font-['MADE_Outer_Sans',sans-serif] font-bold text-white text-xl md:text-2xl text-center lg:text-left">
+                <div className="flex flex-col items-center gap-2">
+                  <p className="font-['MADE_Outer_Sans',sans-serif] font-bold text-white text-xl md:text-2xl text-center">
                     Dúvidas? Fale com o suporte agora!
                   </p>
-                  <p className="font-['MADE_Outer_Sans',sans-serif] font-normal text-white/70 text-base md:text-lg text-center lg:text-left">
+                  <p className="font-['MADE_Outer_Sans',sans-serif] font-normal text-white/70 text-base md:text-lg text-center">
                     Clique aqui para ter Suporte.
                   </p>
                 </div>
