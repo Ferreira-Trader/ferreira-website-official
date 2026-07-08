@@ -975,15 +975,15 @@ export const PginaNetflix = ({ variant = 'default' }: PginaNetflixProps = {}): J
           </div>
 
           <div className="flex flex-col gap-8 lg:gap-12 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-              <h2 className="font-['MADE_Outer_Sans',sans-serif] font-normal text-[#dddddd] text-2xl md:text-3xl lg:col-start-1 lg:row-start-1">
-                Perguntas frequentes
-              </h2>
+            <h2 className="font-['MADE_Outer_Sans',sans-serif] font-normal text-[#dddddd] text-2xl md:text-3xl text-center">
+              Perguntas frequentes
+            </h2>
 
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
               <Accordion
                 type="single"
                 collapsible
-                className="flex flex-col gap-4 w-full lg:col-start-2 lg:row-start-1 lg:row-span-2"
+                className="flex flex-col gap-4 w-full lg:col-start-2 lg:row-start-1"
               >
                 {faqItems.map((item, index) => (
                   <AccordionItem
@@ -1015,7 +1015,7 @@ export const PginaNetflix = ({ variant = 'default' }: PginaNetflixProps = {}): J
                 href="https://ferreiratrader.link/suporte?text=Oi!%20Estou%20no%20site%20de%20vendas%20do%20FerreiraFlix%20e%20tenho%20uma%20d%C3%BAvida%2C%20pode%20me%20ajudar%3F"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex flex-col items-center gap-4 lg:col-start-1 lg:row-start-2"
+                className="flex flex-col items-center gap-4 lg:col-start-1 lg:self-center"
               >
                 <img
                   src="/ferreiraflix/whatsapp-logo.svg"
