@@ -975,8 +975,8 @@ export const PginaNetflix = ({ variant = 'default' }: PginaNetflixProps = {}): J
           </div>
 
           <div className="flex flex-col gap-8 lg:gap-12 relative z-10">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
-              <h2 className="font-['MADE_Outer_Sans',sans-serif] font-normal text-[#dddddd] text-2xl md:text-3xl">
+            <div className="flex flex-col gap-6 lg:gap-8 items-stretch max-w-3xl mx-auto w-full">
+              <h2 className="font-['MADE_Outer_Sans',sans-serif] font-normal text-[#dddddd] text-2xl md:text-3xl text-center">
                 Perguntas frequentes
               </h2>
 
