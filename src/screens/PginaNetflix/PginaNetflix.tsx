@@ -975,15 +975,15 @@ export const PginaNetflix = ({ variant = 'default' }: PginaNetflixProps = {}): J
           </div>
 
           <div className="flex flex-col gap-8 lg:gap-12 relative z-10">
-            <div className="flex flex-col gap-6 lg:gap-8 items-stretch max-w-3xl mx-auto w-full">
-              <h2 className="font-['MADE_Outer_Sans',sans-serif] font-normal text-[#dddddd] text-2xl md:text-3xl text-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+              <h2 className="font-['MADE_Outer_Sans',sans-serif] font-normal text-[#dddddd] text-2xl md:text-3xl lg:col-start-1 lg:row-start-1">
                 Perguntas frequentes
               </h2>
 
               <Accordion
                 type="single"
                 collapsible
-                className="flex flex-col gap-4 w-full"
+                className="flex flex-col gap-4 w-full lg:col-start-2 lg:row-start-1 lg:row-span-2"
               >
                 {faqItems.map((item, index) => (
                   <AccordionItem
@@ -1010,28 +1010,28 @@ export const PginaNetflix = ({ variant = 'default' }: PginaNetflixProps = {}): J
                   </AccordionItem>
                 ))}
               </Accordion>
-            </div>
 
-            <a
-              href="https://ferreiratrader.link/suporte?text=Oi!%20Estou%20no%20site%20de%20vendas%20do%20FerreiraFlix%20e%20tenho%20uma%20d%C3%BAvida%2C%20pode%20me%20ajudar%3F"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex flex-col items-center gap-4 mx-auto"
-            >
-              <img
-                src="/ferreiraflix/whatsapp-logo.svg"
-                alt="WhatsApp"
-                className="w-24 h-24 md:w-40 md:h-40"
-              />
-              <div className="flex flex-col items-center gap-2">
-                <p className="font-['MADE_Outer_Sans',sans-serif] font-bold text-white text-xl md:text-2xl text-center">
-                  Dúvidas? Fale com o suporte agora!
-                </p>
-                <p className="font-['MADE_Outer_Sans',sans-serif] font-normal text-white/70 text-base md:text-lg text-center">
-                  Clique aqui para ter Suporte.
-                </p>
-              </div>
-            </a>
+              <a
+                href="https://ferreiratrader.link/suporte?text=Oi!%20Estou%20no%20site%20de%20vendas%20do%20FerreiraFlix%20e%20tenho%20uma%20d%C3%BAvida%2C%20pode%20me%20ajudar%3F"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center lg:items-start gap-4 lg:col-start-1 lg:row-start-2"
+              >
+                <img
+                  src="/ferreiraflix/whatsapp-logo.svg"
+                  alt="WhatsApp"
+                  className="w-24 h-24 md:w-40 md:h-40"
+                />
+                <div className="flex flex-col items-center lg:items-start gap-2">
+                  <p className="font-['MADE_Outer_Sans',sans-serif] font-bold text-white text-xl md:text-2xl text-center lg:text-left">
+                    Dúvidas? Fale com o suporte agora!
+                  </p>
+                  <p className="font-['MADE_Outer_Sans',sans-serif] font-normal text-white/70 text-base md:text-lg text-center lg:text-left">
+                    Clique aqui para ter Suporte.
+                  </p>
+                </div>
+              </a>
+            </div>
           </div>
         </section>
 
