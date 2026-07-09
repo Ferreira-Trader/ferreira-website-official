@@ -1,0 +1,7 @@
+# NUNCA commitar credenciais nem dependências deste tooling
+node_modules/
+*.json.key
+service-account*.json
+credentials*.json
+.env
+.env.*

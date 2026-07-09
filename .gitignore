@@ -3,6 +3,10 @@ dist
 .wrangler
 *.zip
 
+# Artefatos de validação/screenshots gerados por agentes (Playwright MCP)
+.playwright-mcp/
+/*.png
+
 # Claude Code: overrides pessoais não-versionados
 .claude/settings.local.json
 # MCP local — só commitar se NÃO tiver tokens (preferir .mcp.json.example)

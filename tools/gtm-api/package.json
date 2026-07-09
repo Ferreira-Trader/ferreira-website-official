@@ -1,0 +1,14 @@
+{
+  "name": "gtm-api",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Tooling isolado para manipular o container GTM-PJGMM2NV via Tag Manager API v2. Fora do bundle Vite do site.",
+  "scripts": {
+    "inspect": "node inspect.mjs",
+    "apply:ferreiraflix-pixel": "node apply-ferreiraflix-pixel.mjs"
+  },
+  "dependencies": {
+    "googleapis": "^144.0.0"
+  }
+}
