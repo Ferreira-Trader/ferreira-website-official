@@ -134,15 +134,15 @@ export function FerreiraFlixObrigadoPage() {
             <cakto-upsell-accept
               bg-color="#00bcff"
               text-color="#001018"
-              upsell-accept-url="members_area"
+              upsell-accept-url="https://alunos.alfaclass.com.br"
               offer-id="mjjtzcf"
               app-base-url="https://app.cakto.com.br"
               offer-type="upsell"
-              upsell-reject-url="members_area"
+              upsell-reject-url="https://alunos.alfaclass.com.br"
             >
               Sim, quero acelerar meus resultados
             </cakto-upsell-accept>
-            <cakto-upsell-reject upsell-reject-url="members_area">
+            <cakto-upsell-reject upsell-reject-url="https://alunos.alfaclass.com.br">
               Não quero
             </cakto-upsell-reject>
           </cakto-upsell-buttons>
