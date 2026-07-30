@@ -70,9 +70,14 @@ export function FerreiraFlixObrigadoPage() {
           Compra confirmada
         </span>
 
-        <h1 className="text-white text-3xl md:text-5xl font-bold leading-tight">
-          Seu acesso ao <span className="text-[#00bcff]">FerreiraFlix</span> está
-          garantido!
+        <h1 className="text-white text-3xl md:text-5xl font-bold leading-tight flex flex-wrap items-center justify-center gap-x-3 gap-y-1">
+          <span>Seu acesso ao</span>
+          <img
+            src="/ferreiraflix/ferreiraflix-2.svg"
+            alt="FerreiraFlix"
+            className="h-7 md:h-11 w-auto inline-block translate-y-[0.05em]"
+          />
+          <span>está garantido!</span>
         </h1>
         <p className="text-[#9f9f9f] text-base md:text-lg max-w-xl">
           Mas antes de entrar, uma oportunidade que não vai se repetir.
