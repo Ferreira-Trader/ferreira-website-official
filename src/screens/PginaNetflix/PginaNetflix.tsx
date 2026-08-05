@@ -14,7 +14,7 @@ import { ScrollingCandles } from "../../components/ferreiraflix/ScrollingCandles
 import { useLeadCapture } from "../../components/ferreiraflix/LeadCaptureProvider";
 import { Plus, X } from "lucide-react";
 
-export type PginaNetflixVariant = 'default' | 'v2-lead-form';
+export type PginaNetflixVariant = 'default' | 'v2-lead-form' | 'v3-cakto';
 
 const CountUpNumber: React.FC<{ value: string }> = ({ value }) => {
   const hasPrefix = value.startsWith('+');
@@ -358,6 +358,14 @@ export const PginaNetflix = ({ variant = 'default' }: PginaNetflixProps = {}): J
   const scrollToCheckout = () => {
     (window as any).lenis?.scrollTo('#checkout-section');
   };
+
+  // v3 usa checkout Cakto (vendas direta) com parcela levemente diferente.
+  // As UTMs são propagadas automaticamente no link pelo useUTMTracking.
+  const isCaktoCheckout = variant === 'v3-cakto';
+  const checkoutHref = isCaktoCheckout
+    ? 'https://pay.cakto.com.br/obbwzsx_1009909'
+    : 'https://pay.hotmart.com/S100822439E?checkoutMode=10&sck=9fb8aa2a212342e3945ac6c59c1c0b44-9f79dcadd9a4473484a804455aafd6a9&';
+  const installmentValue = isCaktoCheckout ? 'R$ 41,09' : 'R$ 41,06';
 
   return (
     <div className="bg-black w-full min-h-screen relative overflow-x-hidden">
@@ -887,7 +895,7 @@ export const PginaNetflix = ({ variant = 'default' }: PginaNetflixProps = {}): J
                     <p className="font-['MADE_Outer_Sans',sans-serif] font-normal text-center">
                       <span className="text-white text-base">12x de </span>
                       <span className="text-[#fc0820] text-4xl md:text-5xl lg:text-[56px] font-bold">
-                        R$ 41,06
+                        {installmentValue}
                       </span>
                     </p>
                     <p className="text-white text-base">ou R$ 397,00 à vista</p>
@@ -906,7 +914,7 @@ export const PginaNetflix = ({ variant = 'default' }: PginaNetflixProps = {}): J
                     </button>
                   ) : (
                     <a
-                      href="https://pay.hotmart.com/S100822439E?checkoutMode=10&sck=9fb8aa2a212342e3945ac6c59c1c0b44-9f79dcadd9a4473484a804455aafd6a9&"
+                      href={checkoutHref}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="w-full"
