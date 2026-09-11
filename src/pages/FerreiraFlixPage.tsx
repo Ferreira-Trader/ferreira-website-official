@@ -5,7 +5,7 @@ import { useUTMTracking } from "../hooks/useUTMTracking";
 import { useCampaignId } from "../hooks/useCampaignId";
 
 export function FerreiraFlixPage() {
-  useCampaignId('2025-03-ferreiraflix-vendas');
+  useCampaignId('2026-09-ferreiraflix-cakto');
   useUTMTracking();
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export function FerreiraFlixPage() {
 
   return (
     <div className="page-ferreiraflix">
-      <PginaNetflix />
+      <PginaNetflix variant="v3-cakto" />
     </div>
   );
 }
