@@ -1572,7 +1572,7 @@ export const Desktop = (): JSX.Element => {
           referência ao desempenho passado ou potencial de uma estratégia
           abordada no conteúdo não é, e não deve ser interpretada como uma
           recomendação ou como garantia de qualquer resultado específico.&quot;
-          Políticas de Privacidade | Termos de uso
+          <a href="/politica-privacidade" className="underline">Políticas de Privacidade</a> | Termos de uso
         </p>
       </footer>
     </div>

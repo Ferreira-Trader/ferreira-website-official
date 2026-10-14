@@ -6,6 +6,7 @@ import { FerreiraFlixPage } from "./pages/FerreiraFlixPage";
 import { FerreiraFlixV2Page } from "./pages/FerreiraFlixV2Page";
 import { FerreiraFlixV3Page } from "./pages/FerreiraFlixV3Page";
 import { FerreiraFlixObrigadoPage } from "./pages/FerreiraFlixObrigadoPage";
+import { PrivacyPolicyPage } from "./pages/PrivacyPolicyPage";
 import "../tailwind.css";
 
 createRoot(document.getElementById("app") as HTMLElement).render(
@@ -17,6 +18,9 @@ createRoot(document.getElementById("app") as HTMLElement).render(
         <Route path="/ferreiraflix-v2" element={<FerreiraFlixV2Page />} />
         <Route path="/ferreiraflix-v3" element={<FerreiraFlixV3Page />} />
         <Route path="/ferreiraflix/obrigado" element={<FerreiraFlixObrigadoPage />} />
+        {/* /politica-privacidade é o endereço antigo (WordPress e app do Instagram); /privacy-policy, o apelido que o WordPress também tinha. */}
+        <Route path="/politica-privacidade" element={<PrivacyPolicyPage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
         <Route path="*" element={null} />
       </Routes>
     </BrowserRouter>

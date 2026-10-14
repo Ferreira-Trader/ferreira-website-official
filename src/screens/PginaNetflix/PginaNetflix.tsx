@@ -1052,7 +1052,8 @@ export const PginaNetflix = ({ variant = 'default' }: PginaNetflixProps = {}): J
               abordada no conteúdo não é, e não deve ser interpretada como uma
               recomendação ou como garantia de qualquer resultado
               específico.&quot; Copyright © 2025 Inc. Todos os direitos
-              reservados.
+              reservados.{" "}
+              <a href="/politica-privacidade" className="underline">Política de Privacidade</a>
             </p>
 
             <img
