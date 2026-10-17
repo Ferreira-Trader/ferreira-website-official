@@ -25,6 +25,124 @@ Se a sessão for **interrompida no meio**, marcar no título `— INCOMPLETA` e 
 
 ---
 
+## 2026-10-14 — Política de privacidade publicada em /politica-privacidade
+
+> Reconstruída em 2026-10-17 a partir do git log.
+
+**Objetivo**: publicar a política de privacidade, que abria em branco depois que o WordPress saiu do ar (LGPD: os sites enviam IP, localização e cadastro à Meta e ao Google).
+**Branch**: não registrado.
+**Commits**:
+- `5af0fe1` O site volta a ter política de privacidade, que o rodapé citava sem link
+
+**Tijolos fechados**:
+- Nova página `src/pages/PrivacyPolicyPage.tsx` (187 linhas), com rota em `src/main.tsx`; `/privacy-policy` é apelido.
+- Texto descreve o que os sites fazem: formulários, checkout, cookies do GTM, Pixel e Conversions API, GA4, Google Ads e Clarity, e localização pela base DB-IP (com a citação que a licença exige).
+- Rodapé (`src/screens/Desktop.tsx`, `src/screens/PginaNetflix/PginaNetflix.tsx`) passa a linkar a página.
+
+**Tijolos em andamento / incompletos**: nenhum registrado.
+**Decisões**:
+- Encarregado: Kelvin de Jesus Brito (falecom@kelvinbrito.com), sem CPF.
+- Endereço só com cidade e UF.
+
+**Pendências pra próxima sessão**: não registrado.
+**Próximo passo sugerido**: não registrado.
+
+---
+
+## 2026-09-11 — Cakto vira checkout da página principal do /ferreiraflix
+
+> Reconstruída em 2026-10-17 a partir do git log.
+
+**Objetivo**: promover a variante com checkout Cakto a página principal do `/ferreiraflix`.
+**Branch**: não registrado.
+**Commits**:
+- `a1ae7e0` Promove checkout Cakto a página principal do /ferreiraflix
+
+**Tijolos fechados**:
+- `src/pages/FerreiraFlixPage.tsx` passa a usar a variante `v3-cakto` (parcela 12x R$ 41,09) no lugar do Hotmart, com campaign novo `2026-09-ferreiraflix-cakto`.
+- `/ferreiraflix-v3` segue existindo em paralelo.
+
+**Tijolos em andamento / incompletos**: nenhum registrado.
+**Decisões**: Cakto substitui o Hotmart na página principal (conforme mensagem do commit).
+**Pendências pra próxima sessão**: não registrado.
+**Próximo passo sugerido**: não registrado.
+
+---
+
+## 2026-08-05 — /ferreiraflix-v3 com checkout Cakto
+
+> Reconstruída em 2026-10-17 a partir do git log.
+
+**Objetivo**: criar variante de vendas direta do FerreiraFlix apontando para o checkout Cakto.
+**Branch**: não registrado.
+**Commits**:
+- `16df2f6` Cria /ferreiraflix-v3 com checkout Cakto (vendas direta)
+
+**Tijolos fechados**:
+- Rota `/ferreiraflix-v3` (`src/pages/FerreiraFlixV3Page.tsx`, `src/main.tsx`) com a variante `v3-cakto` do `PginaNetflix`.
+- Checkout `pay.cakto.com.br/obbwzsx_1009909` e parcela 12x R$ 41,09; à vista R$ 397 e valor riscado mantidos.
+- Checkout e parcela parametrizados por variante; `/ferreiraflix` e `/ferreiraflix-v2` seguem com Hotmart e 41,06.
+- UTMs propagam no link Cakto pelo `useUTMTracking`.
+
+**Tijolos em andamento / incompletos**: nenhum registrado.
+**Decisões**: checkout e parcela por variante, para não mexer nas páginas existentes.
+**Pendências pra próxima sessão**: não registrado.
+**Próximo passo sugerido**: não registrado.
+
+---
+
+## 2026-07-29 — Página de obrigado /ferreiraflix/obrigado com upsell da Neuron
+
+> Reconstruída em 2026-10-17 a partir do git log.
+
+**Objetivo**: criar a página pós-compra do FerreiraFlix ofertando a Neuron via upsell 1-clique da Cakto.
+**Branch**: não registrado.
+**Commits**:
+- `9237435` Cria página de obrigado /ferreiraflix/obrigado com upsell da Neuron
+- `c06eeb9` Aponta aceite e recusa do upsell da Neuron para alunos.alfaclass.com.br
+- `347abc5` Usa a logo do FerreiraFlix no lugar do texto na headline do obrigado
+
+**Tijolos fechados**:
+- `src/pages/FerreiraFlixObrigadoPage.tsx` + rota em `src/main.tsx`: web components e script `upsell.js` da Cakto carregados só nesta rota; visual Neuron (ciano), VSL da Neuron, preço R$ 197/mês com aviso de cobrança recorrente, `page_campaign_id` no padrão.
+- `upsell-accept-url` e `upsell-reject-url` apontam para `alunos.alfaclass.com.br` (substitui o placeholder `members_area`).
+- Headline usa a logo oficial do FerreiraFlix inline no lugar do texto.
+
+**Tijolos em andamento / incompletos**: `offer-id` provisório (`mjjtzcf`, do exemplo da Cakto) em `FerreiraFlixObrigadoPage.tsx`; a mensagem do commit diz para trocar pelo real após teste.
+**Decisões**: não registrado.
+**Pendências pra próxima sessão**:
+- Trocar o `offer-id` provisório pelo real após teste.
+
+**Próximo passo sugerido**: testar o upsell na Cakto e trocar o `offer-id`.
+
+---
+
+## 2026-07-08 — Layout da FAQ do FerreiraFlix + tooling GTM API
+
+> Reconstruída em 2026-10-17 a partir do git log.
+
+**Objetivo**: ajustar o layout da seção de perguntas frequentes do FerreiraFlix e adicionar tooling para o container GTM.
+**Branch**: não registrado.
+**Commits**:
+- `87c6511` Centraliza a seção de perguntas frequentes do FerreiraFlix
+- `7dcc6d4` Ajusta FAQ do FerreiraFlix para layout lado a lado
+- `93e9b42` Centraliza bloco de suporte na coluna da FAQ do FerreiraFlix
+- `2fb68c4` Move título da FAQ do FerreiraFlix para o topo centralizado
+- `1f702b5` Adiciona tooling GTM API e ignora artefatos de validação
+
+**Tijolos fechados**:
+- FAQ em `src/screens/PginaNetflix/PginaNetflix.tsx` (componente compartilhado por `/ferreiraflix` e `/ferreiraflix-v2`): após quatro iterações por feedback, o layout final tem o título "Perguntas frequentes" centralizado em largura total no topo; abaixo, bloco de suporte WhatsApp (esquerda, centralizado verticalmente) e accordion (direita); no mobile empilha título, perguntas, suporte.
+- `tools/gtm-api/` (`gtm.mjs`, `inspect.mjs`, README, package.json): scaffold isolado para manipular o container GTM-PJGMM2NV via Tag Manager API v2, fora do bundle Vite, credenciais bloqueadas pelo `.gitignore` interno.
+- `.gitignore` ignora `.playwright-mcp/` e PNGs na raiz (artefatos de validação visual).
+
+**Tijolos em andamento / incompletos**: nenhum registrado.
+**Decisões**:
+- O primeiro layout (coluna única centralizada, `87c6511`) foi corrigido por feedback: o bloco de suporte deve ficar ao lado do accordion, com o título no topo.
+
+**Pendências pra próxima sessão**: não registrado.
+**Próximo passo sugerido**: não registrado.
+
+---
+
 ## 2026-05-23 — Documentação operacional + template + agents customizados Claude
 
 **Objetivo**: estabelecer estrutura padronizada de documentação Claude para este repo e criar template reutilizável em `~/aiprojects/templates/claude-repo-template/` com agents customizados instaláveis globalmente.
