@@ -5,8 +5,12 @@
 // 03/03/2025 do aplicativo de atendimento no Instagram, que vivia no WordPress antigo.
 // Ao mudar o tracking (tag nova, plataforma nova, cookie novo), atualize a seção correspondente
 // e a data de "Última atualização".
+//
+// Atualizada em 30/10/2026 para cobrir a coleta técnica na inscrição (kbtec-collect, ADR-064 do
+// kb-business-os): sinais do aparelho e do navegador, IPv4/IPv6, provedor, cookie kb_vid e impressão
+// digital do navegador. Base legal e redação a revisar pelo jurídico do Ferreira.
 
-const UPDATED_AT = "14 de outubro de 2026";
+const UPDATED_AT = "30 de outubro de 2026";
 
 type Block = { title: string; paragraphs?: string[]; items?: string[] };
 
@@ -17,6 +21,7 @@ const COOKIES: { name: string; what: string; duration: string }[] = [
   { name: "_ga, _ga_*", what: "Google Analytics: medir visitas e uso das páginas", duration: "até 2 anos" },
   { name: "_fbp, _fbc", what: "Meta (Facebook e Instagram): medir resultado de anúncios", duration: "até 90 dias" },
   { name: "_gcl_*", what: "Google Ads: medir resultado de anúncios", duration: "até 90 dias" },
+  { name: "kb_vid", what: "código aleatório que reconhece o seu navegador entre visitas (não contém nome nem e-mail), para contar visitas e medir de qual campanha você veio. Mesmo que você apague o cookie, um registro equivalente pode permanecer no armazenamento local do navegador (localStorage)", duration: "2 anos" },
   { name: "_clck, _clsk", what: "Microsoft Clarity: entender como as páginas são usadas", duration: "até 1 ano" },
 ];
 
@@ -47,10 +52,20 @@ const BLOCKS: Block[] = [
     title: "",
     paragraphs: ["Dados coletados automaticamente quando você visita as páginas:"],
     items: [
-      "endereço IP e a localização aproximada que se deduz dele (país, estado e cidade). Não usamos o GPS do seu aparelho;",
-      "navegador, sistema operacional, idioma e tipo de aparelho;",
-      "páginas visitadas, de onde você veio (por exemplo, de qual anúncio) e as ações nas páginas, como cliques e formulários enviados;",
+      "endereço IP (nas versões IPv6 e IPv4, quando houver os dois) e a localização aproximada que se deduz dele (país, estado e cidade), além do provedor de internet e do número da rede (ASN). Não usamos o GPS do seu aparelho nem pedimos a sua localização exata;",
+      "navegador, versão, sistema operacional, idioma e tipo de aparelho, inclusive o modelo do aparelho quando o navegador informa;",
+      "características do aparelho e do navegador: tamanho da tela e da janela, densidade de pixels, orientação, fuso horário, idiomas configurados, plataforma, número de núcleos do processador e quantidade aproximada de memória, se a tela é sensível ao toque, tema claro ou escuro, preferências de acessibilidade e de exibição, uma estimativa da faixa de velocidade da conexão, e a placa de vídeo que o navegador informa;",
+      "como você usa a página: de onde veio, o primeiro e o último anúncio ou link que trouxeram você (UTM e códigos de clique, como fbclid, gclid, ttclid, wbraid e gbraid), número de visitas, quanto você rolou a página e quanto tempo ficou nela, além do identificador do Google Analytics (_ga);",
+      "uma impressão digital do navegador (explicada abaixo);",
+      "o que o seu navegador informa sobre preferências de privacidade (sinal Não Rastrear e Global Privacy Control). Hoje registramos esse sinal, mas ele não muda a coleta; para se opor, use o canal da seção 8;",
       "identificadores guardados em cookies (seção 6).",
+    ],
+  },
+  {
+    title: "",
+    paragraphs: [
+      "O que é a impressão digital do navegador: é um código calculado, no seu próprio navegador, a partir de detalhes técnicos como a forma como ele desenha um pequeno desenho invisível (canvas e WebGL), o som que ele produz internamente (áudio) e as fontes instaladas. O código é um resumo (hash) e serve para reconhecer o mesmo aparelho entre visitas, mesmo sem cookie. Ela identifica o navegador, não a pessoa, mas fica associada ao seu cadastro quando você se inscreve. Calculamos com código nosso, sem biblioteca de terceiros. Usamos para reconhecer o mesmo aparelho entre visitas, medir quais campanhas trazem resultado e prevenir fraude e cadastros duplicados ou automatizados (robôs).",
+      "Esses dados técnicos são enviados junto com a sua inscrição, no momento em que você envia o formulário, e ficam guardados com o seu cadastro.",
     ],
   },
   {
@@ -60,7 +75,9 @@ const BLOCKS: Block[] = [
       "processar compras, liberar o acesso aos produtos e cuidar da renovação e do pós-venda;",
       "medir quantas pessoas visitam as páginas e quais anúncios trazem resultado, e mostrar anúncios a quem já demonstrou interesse;",
       "melhorar as páginas e os produtos;",
-      "prevenir fraude e cumprir obrigações legais e fiscais.",
+      "reconhecer o mesmo aparelho entre visitas e ligar a inscrição à campanha de origem, com base nos dados técnicos e na impressão digital do navegador;",
+      "prevenir fraude, cadastros duplicados e acessos automatizados (robôs), usando os dados técnicos e a impressão digital;",
+      "cumprir obrigações legais e fiscais.",
     ],
   },
   {
@@ -68,7 +85,7 @@ const BLOCKS: Block[] = [
     items: [
       "execução de contrato (art. 7º, V): para entregar o que você comprou ou pediu;",
       "consentimento (art. 7º, I): quando você envia um formulário pedindo contato ou material;",
-      "legítimo interesse (art. 7º, IX): para medir visitas e resultado de anúncios, melhorar as páginas e prevenir fraude, sempre respeitando os seus direitos. Você pode se opor a qualquer momento (seção 8);",
+      "legítimo interesse (art. 7º, IX): para medir visitas e resultado de anúncios, melhorar as páginas, prevenir fraude e cadastros duplicados e reconhecer o mesmo aparelho entre visitas. É a base dos sinais técnicos do aparelho e do navegador e da impressão digital, sempre respeitando os seus direitos. Você pode se opor a qualquer momento, e interrompemos esse tratamento quando não houver motivo legítimo que o justifique (seção 8);",
       "cumprimento de obrigação legal (art. 7º, II): para guardar registros fiscais e de acesso exigidos por lei.",
     ],
   },
@@ -92,13 +109,13 @@ const BLOCKS: Block[] = [
   {
     title: "",
     paragraphs: [
-      "A localização aproximada a partir do IP usa a base IP Geolocation by DB-IP (https://db-ip.com), licenciada sob Creative Commons Attribution 4.0. A consulta acontece nos nossos servidores, sem enviar o seu IP à DB-IP.",
+      "A localização aproximada e o provedor de internet (ASN) a partir do IP usam as bases IP Geolocation by DB-IP (https://db-ip.com), licenciadas sob Creative Commons Attribution 4.0. A consulta acontece nos nossos servidores, sem enviar o seu IP à DB-IP.",
     ],
   },
   {
     title: "8. Seus direitos",
     paragraphs: [
-      "Pela LGPD, você pode a qualquer momento: confirmar se tratamos dados seus e acessá-los; corrigir dados incompletos ou desatualizados; pedir anonimização, bloqueio ou eliminação de dados desnecessários; pedir a portabilidade; saber com quem compartilhamos; revogar o consentimento; e se opor a um tratamento feito por legítimo interesse.",
+      "Pela LGPD, você pode a qualquer momento: confirmar se tratamos dados seus e acessá-los; corrigir dados incompletos ou desatualizados; pedir anonimização, bloqueio ou eliminação de dados desnecessários; pedir a portabilidade; saber com quem compartilhamos; revogar o consentimento; e se opor a um tratamento feito por legítimo interesse, inclusive à coleta dos sinais técnicos e da impressão digital do navegador. Você também pode apagar o cookie kb_vid e os dados do site no seu navegador a qualquer momento.",
       "Para isso, escreva para falecom@kelvinbrito.com. Respondemos em até 15 dias. Se não ficar satisfeito, você pode reclamar à Autoridade Nacional de Proteção de Dados (ANPD) ou aos órgãos de defesa do consumidor.",
     ],
   },
