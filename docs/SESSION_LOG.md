@@ -25,6 +25,32 @@ Se a sessão for **interrompida no meio**, marcar no título `— INCOMPLETA` e 
 
 ---
 
+## 2026-10-30 — Política de Privacidade com a coleta técnica v2 e Termos de Uso (rascunho)
+
+**Objetivo**: alinhar a Política de Privacidade à coleta técnica do kbtec-collect e publicar os Termos de Uso.
+**Branch**: main.
+**Commits**:
+- `6ec3a2c` Política de Privacidade cobre a coleta técnica e nascem os Termos de Uso (com push)
+
+**Tijolos fechados**:
+- `src/pages/PrivacyPolicyPage.tsx` descreve a coleta técnica v2: cookie `kb_vid` de 2 anos, impressão digital do navegador, IPv4, provedor/ASN e sinais do aparelho; base legal legítimo interesse (art. 7º, IX), com direito de oposição. DNT e GPC só são registrados.
+- Nova `src/pages/TermsOfUsePage.tsx`, com rotas `/termos-de-uso` e `/terms-of-use` em `src/main.tsx`. Texto escrito como rascunho.
+- Publicado pelo Cloudflare Pages a partir do push e conferido no ar.
+
+**Tijolos em andamento / incompletos**: nenhum registrado.
+**Decisões**:
+- Termos de Uso entram como rascunho, a revisar pelo jurídico.
+- Contexto em `ferreira-website-black2026/`: o rodapé e a linha de concordância do formulário da Black 2026 (commit `3c90852`) linkam estas duas páginas. Esse repo não tem log de sessões.
+
+**Pendências pra próxima sessão**:
+- Revisão do jurídico do Ferreira sobre a Política e os Termos: [ClickUp 86e3xa4c9](https://app.clickup.com/t/86e3xa4c9).
+- `src/screens/Desktop.tsx:1575` mostra "Termos de uso" sem link (fora do escopo desta sessão).
+- `src/screens/PginaNetflix/PginaNetflix.tsx`: a confirmar, o texto "termos" não aparece no arquivo.
+
+**Próximo passo sugerido**: levar a Política e os Termos ao jurídico do Ferreira e, com a resposta, ligar o "Termos de uso" do rodapé de `Desktop.tsx` aos Termos.
+
+---
+
 ## 2026-10-14 — Política de privacidade publicada em /politica-privacidade
 
 > Reconstruída em 2026-10-17 a partir do git log.
