@@ -25,6 +25,32 @@ Se a sessão for **interrompida no meio**, marcar no título `— INCOMPLETA` e 
 
 ---
 
+## 2026-11-08 — Site oficial sem GTM (ADR-074 do kb-business-os)
+
+**Objetivo**: tirar o GTM-PJGMM2NV do site para o Worker da borda passar a injetar o rastreio (kb-track.js).
+**Branch**: main (prévia pela branch `sem-gtm`, apagada depois do merge).
+**Commits**:
+- `f4bd8b5` Site oficial sem GTM: o rastreio passa a ser injetado pelo Worker da borda (com push)
+
+**Tijolos fechados**:
+- `index.html` sem o snippet, o noscript e o push de `page_campaign_id` do head.
+- `src/lib/analytics.ts`: o `form_success` também empurra `{event:'kb_lead', event_id: transactionId}`; sem isso o Lead do modal do `/ferreiraflix-v2` (que vinha da tag do GTM) sumiria.
+- `CLAUDE.md` do repo deixa de mandar pôr pixel no GTM e explica o freio do Worker.
+- Prévia `67835aa8` conferida (sem erro, sem GTM); produção conferida em ferreiratrader.com.br: `/ferreiraflix`, `/ferreiraflix-v2`, `/ferreiraflix/obrigado` com 1 PageView no pixel 848090680352869, `/neuron` no 3542645589298894, GA4 `page_view`+`PageView` pelo yag, Clarity, gtm.js ausente. `kb_lead` sintético (envio interceptado) gerou Lead + `generate_lead` com o mesmo id.
+
+**Tijolos em andamento / incompletos**: nenhum.
+**Decisões**:
+- O Lead vai sempre no pixel padrão 3542645589298894, mesmo no `/ferreiraflix` (regra do kb-track, como a tag 96 do GTM).
+- Os pushes `form_*` e o `useCampaignId` ficaram: hoje não alimentam nada, mas tirar mexeria em 6 páginas sem ganho.
+
+**Pendências pra próxima sessão**:
+- A Política de Privacidade (`PrivacyPolicyPage.tsx`) ainda cita o container GTM-PJGMM2NV; ajustar junto com a revisão do jurídico.
+- `www.ferreiratrader.com.br` responde 522 (não é domínio do projeto Pages); anterior a esta sessão.
+
+**Próximo passo sugerido**: o Kelvin confere no Events Manager da Meta e no GA4 (tempo real) que PageView e Lead do site continuam chegando.
+
+---
+
 ## 2026-10-30 — Política de Privacidade com a coleta técnica v2 e Termos de Uso (rascunho)
 
 **Objetivo**: alinhar a Política de Privacidade à coleta técnica do kbtec-collect e publicar os Termos de Uso.
