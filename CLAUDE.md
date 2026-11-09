@@ -48,11 +48,10 @@ Rotas são declaradas em [main.tsx](src/main.tsx). Cloudflare Pages faz fallback
 
 A página atual reusa o mesmo componente `<PginaNetflix variant="default" | "v2-lead-form" />` — só o botão de checkout muda conforme a prop. Refatorar sem duplicar 1k+ linhas.
 
-### Tracking GTM (web + server Stape)
-- Web container: `GTM-PJGMM2NV` (declarado em [index.html](index.html))
-- Server (Stape): `https://yag.ferreiratrader.com.br/gtm.js`
-- **Sem pixel inline em `index.html`** — todas as tags Meta/Google são gerenciadas no GTM
-- Código React só faz `window.dataLayer.push({ event: '...', ... })` via [src/lib/analytics.ts](src/lib/analytics.ts); o GTM consome e dispara o que precisa
+### Tracking sem GTM (desde 08/11/2026, ADR-074 do kb-business-os)
+- O rastreio (PageView da Meta, GA4 pelo `yag.ferreiratrader.com.br`, Clarity) é **injetado pelo Worker da borda** (`kbtec-ferreira-collect-edge`, script `kb-track.js`). O `index.html` não tem GTM.
+- **Não colar GTM, `fbq` nem `rastreio.js` no `index.html`**: o Worker vê outro rastreio e deixa de injetar.
+- Lead: [src/lib/analytics.ts](src/lib/analytics.ts) empurra `{event:'kb_lead', event_id: transactionId}` no `form_success`; o kb-track transforma em Lead (Meta) e `generate_lead` (GA4). Os outros pushes (`form_*`, `page_campaign_id`) hoje não alimentam nada.
 
 ### Captura de lead (padrão Ferreira)
 Padrão herdado de [ferreira-alfa-lista-espera](../ferreira-alfa-lista-espera) e replicado em `/ferreiraflix-v2`:
@@ -101,9 +100,9 @@ Formato `YYYY-MM-produto[-versão][-tipo]`. Exemplos válidos em uso:
 O `campaign` enviado ao Apps Script/DataCrazy e o `page_campaign_id` do `useCampaignId` **devem coincidir**.
 
 ### Tracking
-- **NUNCA** adicionar `<script>fbq(...)</script>` em `index.html`. Pixel Meta vai no GTM (web + server Stape).
-- **NUNCA** chamar `window.fbq()` no código React. O dataLayer event dispara a tag.
-- O `transaction_id` empurrado no `form_success` é o mesmo `eventID` do payload de submit — permite Stape deduplicar browser ↔ CAPI.
+- **NUNCA** adicionar `<script>fbq(...)</script>` nem GTM em `index.html`. O pixel vem do Worker (kb-track.js).
+- **NUNCA** chamar `window.fbq()` no código React. O `kb_lead` no dataLayer dispara o Lead.
+- O `event_id` do `kb_lead` é o mesmo `transactionId` do payload de submit — permite deduplicar browser ↔ CAPI.
 
 ### Captura de lead
 - Sempre usar `Promise.allSettled` ao enviar para múltiplos endpoints — falha de um não bloqueia o outro nem o redirect.
@@ -140,8 +139,8 @@ Atualmente o projeto **não usa** env vars no build. Todas as URLs sensíveis (A
 |------------|------|------------------|
 | Hotmart (Neuron) | `Desktop.tsx` | `pay.hotmart.com/J101304792C?off=...` (3 ofertas) |
 | Hotmart (FerreiraFlix) | `PginaNetflix.tsx` / `hotmartCheckout.ts` | `pay.hotmart.com/S100822439E?...&sck=9fb8aa2a...` |
-| GTM Web | `index.html` | `GTM-PJGMM2NV` via `yag.ferreiratrader.com.br/gtm.js` |
-| GTM Server (Stape) | (painel externo) | `yag.ferreiratrader.com.br` |
+| Rastreio (Meta, GA4, Clarity) | Worker da borda (fora deste repo) | `yag.ferreiratrader.com.br/collect/kb-track.js` |
+| Servidor do GA4/CAPI (sGTM) | (painel externo) | `yag.ferreiratrader.com.br` |
 | Apps Script (planilha lead) | `leadSubmit.ts` | `script.google.com/macros/s/AKfycbzd.../exec` (compartilhado com alfa + diagnostico) |
 | DataCrazy CRM (FerreiraFlix v2) | `dataCrazy.ts` | `api.datacrazy.io/v1/crm/.../19fbbc11-...` |
 | WhatsApp suporte | `PginaNetflix.tsx` / `Desktop.tsx` | `ferreiratrader.link/suporte?text=...` (excluído da propagação de UTMs) |

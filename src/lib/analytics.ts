@@ -40,6 +40,13 @@ export const trackFormSuccess = (
     ...(userData && { userData }),
     ...utms,
   });
+  // Sem GTM (ADR-074 do kb-business-os), quem dispara o Lead é o kb-track.js injetado pelo Worker:
+  // ele ouve o kb_lead e manda Lead na Meta e generate_lead no GA4 com este event_id. O transactionId
+  // é o mesmo do envio à planilha, para o servidor deduplicar navegador e CAPI.
+  pushToDataLayer({
+    event: 'kb_lead',
+    event_id: transactionId,
+  });
 };
 
 export const trackFormError = (
